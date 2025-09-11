@@ -16,3 +16,4 @@ function changeWord() {
     document.querySelector('h3#world').innerHTML = "안녕!";
     //화면요소를 선택.
 }
+// 점수가 90점 보다 크면 "아주 잘했어요"
