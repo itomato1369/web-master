@@ -11,10 +11,27 @@
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous">
     </script>
 </head>
-
+<style>
+    h3{
+        text-align: center;
+    }
+</style>
 <body>
-    <h3>오늘은 반복문, 함수, 이벤트</h3>
-    <script src="function.js"></script>
+    <h3>0912과제 사칙연산</h3>
+    <div>
+    값1: <input type="number" id="num1" value="0">
+    <select onchange="calculate()" name="cal" id="cal">
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="*">*</option>
+        <option value="/">/</option>
+    </select>
+    값2: <input type="number" id="num2" value="0"
+    <span>=></span>
+    결과: <input type="number" id="result" value="0">
+
+    </div>
+    <script src="0912todo.js"></script>
 </body>
 
 </html>

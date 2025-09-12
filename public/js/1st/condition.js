@@ -21,4 +21,4 @@ function calculate() {
             result = first / last; break;
     }
     document.querySelector('#result').value = result;
-} // end of calculate().
+} 

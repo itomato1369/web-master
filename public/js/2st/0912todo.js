@@ -5,3 +5,9 @@
 // 함수 이름 정의 plus, minus, multiply, divide
 //
 //
+
+   let heading = document.querySelector("#heading");
+        heading.onclick = function() {
+            heading.style.color = "red";
+        }
+

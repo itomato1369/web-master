@@ -29,5 +29,3 @@ function changeValue(){
         console.log("낙제입니다")
     }
 }
-
-
