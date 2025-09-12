@@ -51,13 +51,13 @@ showMax(15, 70);
 // //매개값을 2개 => 1 ~ 10 까지 다 더하는 기능 : 1+2+3+...+10
 // sum = 0;
 
-// function sumBy2Number(num1, num2) {
-//     for (let i = num1; i <= num2; i++) {
-//         sum += i;
-//     }
-//     console.log("sum: " + sum);
-// }
-// sumBy2Number(1, 10);
+function sumBy2Number(num1, num2) {
+    for (let i = num1; i <= num2; i++) {
+        sum += i;
+    }
+    console.log("sum: " + sum);
+}
+sumBy2Number(1, 10);
 
 // //    for (조건) {조건이 참일때 실행되는 구간.}
 
