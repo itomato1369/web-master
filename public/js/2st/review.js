@@ -19,9 +19,24 @@
 // let radius = prompt("반지름을 입력하세요");
 // let area = pie * radius * radius;
 // console.log(area);
-let Number = parseInt(prompt("숫자를 입력하세요"));
-if (Number % 3 == 0) {
-    console.log("3의 배수입니다")
-} else {
-    console.log("3의 배수가 아니다")
+// let Number = parseInt(prompt("숫자를 입력하세요"));
+// if (Number % 3 == 0) {
+//     console.log("3의 배수입니다")
+// } else {
+//     console.log("3의 배수가 아니다")
+// }
+// for (초깃값; 조건; 증가식) {}
+let sum = 0;
+for (i = 1; i <6; i++) {
+    sum += i;
 }
+console.log(`1부터 5까지 더하면 ${sum}`);
+// i 는 iterator 반복자
+
+let name = "Kim";
+let classroom = 204;
+console.log(`${name},님 ${classroom}호 강의실로 입장하세요`);
+
+let number1 = 12 / 2;
+let number2 = 15 % 2;
+console.log(`${number1}`); console.log(`${number2}`);
