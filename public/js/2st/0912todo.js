@@ -7,21 +7,23 @@
 // document.querySelector('#') 은 #앞에 붙은 주소를 찾는 것
 
 
-function calculate() {
-    let num1 = document.querySelector("#num1").value;
-    let num2 = document.querySelector("#num2").value;
-    let operation = document.querySelector("#operation").value;
-    let result = 0;
-    console.log(num1, num2, operation);
-    switch (operation) {
-        case 'plus':
-            result = num1 + num2; break;
-        case 'minus':
-            result = num1 - num2; break;
-        case 'multiply':
-            result = num1 * num2; break;
-        case 'divide':
-            result = num1 / num2; break;
-    }
-    document.querySelector('#result').value = result;
-}
+// function calculate() {
+//     let num1 = document.querySelector("#num1").value;
+//     let num2 = document.querySelector("#num2").value;
+//     let operation = document.querySelector("#operation").value;
+//     let result = 0;
+//     console.log(num1, num2, operation);
+//     switch (operation) {
+//         case 'plus':
+//             result = num1 + num2; break;
+//         case 'minus':
+//             result = num1 - num2; break;
+//         case 'multiply':
+//             result = num1 * num2; break;
+//         case 'divide':
+//             result = num1 / num2; break;
+//     }
+//     document.querySelector('#result').value = result;
+// }
+let season = ["봄","여름","가을","겨울"]
+console.log(season[2])
