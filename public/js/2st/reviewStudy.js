@@ -46,3 +46,8 @@ console.log(`${name},님 ${classroom}호 강의실로 입장하세요`);
 let number1 = 12 / 2;
 let number2 = 15 % 2;
 console.log(`${number1}`); console.log(`${number2}`);
+
+let season = ["봄","여름","가을","겨울"]
+console.log(season[2])
+
+// class="button btn btn-primary"

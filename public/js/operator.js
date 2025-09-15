@@ -7,7 +7,6 @@ let result;
 result = num1 + num2;
 console.log("결과는 " + num1 + num2); // 결과는 1020  문자열이 앞에있으면 다 문자로 인식
 console.log("결과는 " + (num1 + num2)); // 결과는 30  () 괄호를 하면 먼저 연산
-console.log("결과는 " + num1 + num2); // 결과는 1020  문자열이 앞에있으면 다 문자로 인식
 
 num1 = 425;
 result = num1 % num2; 

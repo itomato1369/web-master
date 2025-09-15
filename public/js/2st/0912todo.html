@@ -13,21 +13,20 @@
 <body>
     <h1>0912과제</h1>
     <div>
-        값1: <input type="number" id="num1"v value="">
+        값1: <input type="number" id="num1" placeholder="숫자를 입력하세요">
         <select id="operation"name="operation"> <!-- operation연산이라는 뜻 -->
             <option value="plus">+</option> <!-- option은 select 안에 선택지-->
             <option value="minus">-</option>
             <option value="multiply">*</option>
             <option value="divide">/</option>
         </select>
-        값2: <input type="number" id="num2" value="0">
+        값2: <input type="number" id="num2" placeholder="숫자를 입력하세요">
         <span>=></span>
-        <button onchange="calculate()">계산하기</button> 
+        <button onclick="calculate()">계산하기</button> 
         결과: <input type="number" id="result" value="0">
         <!--calculate()이건 javascript 파일에서calculate()라는 함수를 가져온다-->
     </div>
 
-    <script src="0912todo.js">
-    </script>
+    <script src="0912todo.js"></script>
 </body>
 </html>

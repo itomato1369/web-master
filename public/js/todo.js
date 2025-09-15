@@ -45,15 +45,15 @@ if (age >= 18) {
 }
 
 // switch case 를 if ...else...로 
-function calculate() {
-    let first = document.querySelector('#user1').value;
-    let last = document.querySelector('#user2').value;
-    let opr = document.querySelector('#opr').value;
-    let result = 0;
-}
-if (opr == '+') {
-    result = parseInt(first) + parseInt(last); 
-} else if (opr == '-','*','/') {
+// function calculate() {
+//     let first = document.querySelector('#user1').value;
+//     let last = document.querySelector('#user2').value;
+//     let opr = document.querySelector('#opr').value;
+//     let result = 0;
+// }
+// if (opr == '+') {
+//     result = parseInt(first) + parseInt(last); 
+// } else if (opr == '-','*','/') {
     
-}
+// }
 
