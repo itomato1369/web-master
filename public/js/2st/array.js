@@ -13,10 +13,10 @@ let students = [{stdNo: 100, stdName: "김민기", score: 80},
     {stdNo: 200, stdName: "김민우", score: 70},
     {stdNo: 300, stdName: "김민지", score: 85}
 ];
-let str = `<ll>`;
+let str = `<ul>`;
 for (let i = 0; i < 3; i++) {
     console.log(students[i].score);
     str += `<li>학생번호: ${students[i].stdNo}, 이름: ${students[i].stdName}</li>`;
 }
-str += `</ll>`;
+str += `</ul>`;
 document.writeln(str);

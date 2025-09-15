@@ -50,8 +50,6 @@ document.querySelector('.addBtn').addEventListener('click', function () {
     }
 });
 
-
-
 // 함수영역
 // 배열값을 활용해서 학생목록 
 function createStdList() {

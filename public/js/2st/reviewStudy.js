@@ -32,22 +32,126 @@
 // }
 // for (초깃값; 조건; 증가식) {}
 
-let sum = 0;
-for (let i = 1; i<=10000135326262727270; i++) {
-    sum += i;
+// let sum = 0;
+// for (let i = 1; i<=10000135326262727270; i++) {
+//     sum += i;
+// }
+// document.writeln(`${sum}`);
+// // i 는 iterator 반복자
+
+// let name = "Kim";
+// let classroom = 204;
+// console.log(`${name},님 ${classroom}호 강의실로 입장하세요`);
+
+// let number1 = 12 / 2;
+// let number2 = 15 % 2;
+// console.log(`${number1}`); console.log(`${number2}`);
+
+// let season = ["봄","여름","가을","겨울"]
+// console.log(season[2])
+
+// // class="button btn btn-primary"
+
+// let myObject = {
+//     name: '객체',
+//     value: 10
+// };
+// for (let prop in myObject) {
+//     console.log(`${prop}, 값: ${myObject[prop]}`);
+// }
+let fruits = ['사과', '복숭아', '수박', '참외']
+// // fruits[2] = '우박'
+// console.log(fruits[0]);
+
+for (let i = 0; i < 4; i++) {
+    console.log(fruits[i]);
 }
-document.writeln(`${sum}`);
-// i 는 iterator 반복자
+let students = [{
+    stdNo: 100,
+    stdName: '김김김',
+    score: 10
+}, {
+    stdNo: 200,
+    stdName: '이이이',
+    score: 20
+}, {
+    stdNo: 300,
+    stdName: '박박박',
+    score: 30
+}];
 
-let name = "Kim";
-let classroom = 204;
-console.log(`${name},님 ${classroom}호 강의실로 입장하세요`);
+let str = `<ul>`;
+for (let i = 0; i <= 2; i++) {
+    console.log(students[i].stdNo);
+    str += `<li>이름: ${students[i].stdName}, 점수: ${students[i].score}</li>`;
+}
+str += `</ul>`;
+document.writeln(str);
 
-let number1 = 12 / 2;
-let number2 = 15 % 2;
-console.log(`${number1}`); console.log(`${number2}`);
+let studnets = [{
+    stdNo: 100,
+    stdName: '나나나',
+    score: 90
+}];
 
-let season = ["봄","여름","가을","겨울"]
-console.log(season[2])
+document.querySelector('button#addBtn')
+    .addEventListener('click', function () {
+        let sno = document.querySelector('#student_no').value;
+        let sname = document.querySelector('#student_name').value;
+        let score = document.querySelector('#score').value;
 
-// class="button btn btn-primary"
+        if (sno == '' || sname == '' || score == '') {
+            alert('값을 입력하세요');
+            return;
+        }
+        students[students.length] = {
+            stdNo: sno,
+            stdName: sname,
+            score: score
+        };
+        console.log(students);
+        createStdList();
+        document.querySelector('#student_no').value = '';
+        document.querySelector('#student_name').value = '';
+        document.querySelector('#score').value = '';
+    });
+
+document.querySelector('.addBtn')
+    .addEventListener('click', function () {
+        let sno = document.querySelector('#student_no').value;
+        let score = document.querySelector('#score').value;
+        let nodeList = document.querySelectorAll('#list tbody tr');
+        for (let i = 0; i < nodeList.length; i++) {
+            if (nodeList[i].children[0].innerHTML == sno) {
+                nodeList[i].children[2].innerHTML = score;
+            }
+        }
+    });
+
+function createStdList() {
+    let str = ``;
+    for (let i = 0; i < students.length; i++) {
+        str += `
+        <tr onclick='showInfo(event)'>
+            <td>${students[i].stdNo}</td>
+            <td>${students[i].stdName}</td>
+            <td>${students[i].score}</td>
+            <td>
+                <button class='btn btn-danger' onclick='removeRow(event)'>삭제</button>
+            </td>
+        </tr>`;
+    }
+    document.querySelector('#list tbody').innerHTML = str;
+}
+createStdList();
+console.log(document.querySelectorAll('button'));
+
+function removeRow(e) {
+    e.target.parentElement.parentElement.remove();
+}
+
+function showInfo(e) {
+    document.querySelector('#student_no').value = e.target.parentElement.children[0].innerHTML;
+    document.querySelector('#student_name').value = e.target.parentElement.children[1].innerHTML;
+    document.querySelector('#score').value = e.target.parentElement.children[2].innerHTML;
+}
