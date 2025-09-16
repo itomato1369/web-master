@@ -59,99 +59,99 @@
 // for (let prop in myObject) {
 //     console.log(`${prop}, 값: ${myObject[prop]}`);
 // }
-let fruits = ['사과', '복숭아', '수박', '참외']
-// // fruits[2] = '우박'
-// console.log(fruits[0]);
+// let fruits = ['사과', '복숭아', '수박', '참외']
+// // // fruits[2] = '우박'
+// // console.log(fruits[0]);
 
-for (let i = 0; i < 4; i++) {
-    console.log(fruits[i]);
-}
-let students = [{
-    stdNo: 100,
-    stdName: '김김김',
-    score: 10
-}, {
-    stdNo: 200,
-    stdName: '이이이',
-    score: 20
-}, {
-    stdNo: 300,
-    stdName: '박박박',
-    score: 30
-}];
+// for (let i = 0; i < 4; i++) {
+//     console.log(fruits[i]);
+// }
+// let students = [{
+//     stdNo: 100,
+//     stdName: '김김김',
+//     score: 10
+// }, {
+//     stdNo: 200,
+//     stdName: '이이이',
+//     score: 20
+// }, {
+//     stdNo: 300,
+//     stdName: '박박박',
+//     score: 30
+// }];
 
-let str = `<ul>`;
-for (let i = 0; i <= 2; i++) {
-    console.log(students[i].stdNo);
-    str += `<li>이름: ${students[i].stdName}, 점수: ${students[i].score}</li>`;
-}
-str += `</ul>`;
-document.writeln(str);
+// let str = `<ul>`;
+// for (let i = 0; i <= 2; i++) {
+//     console.log(students[i].stdNo);
+//     str += `<li>이름: ${students[i].stdName}, 점수: ${students[i].score}</li>`;
+// }
+// str += `</ul>`;
+// document.writeln(str);
 
-let studnets = [{
-    stdNo: 100,
-    stdName: '나나나',
-    score: 90
-}];
+// let studnets = [{
+//     stdNo: 100,
+//     stdName: '나나나',
+//     score: 90
+// }];
 
-document.querySelector('button#addBtn')
-    .addEventListener('click', function () {
-        let sno = document.querySelector('#student_no').value;
-        let sname = document.querySelector('#student_name').value;
-        let score = document.querySelector('#score').value;
+// document.querySelector('button#addBtn')
+//     .addEventListener('click', function () {
+//         let sno = document.querySelector('#student_no').value;
+//         let sname = document.querySelector('#student_name').value;
+//         let score = document.querySelector('#score').value;
 
-        if (sno == '' || sname == '' || score == '') {
-            alert('값을 입력하세요');
-            return;
-        }
-        students[students.length] = {
-            stdNo: sno,
-            stdName: sname,
-            score: score
-        };
-        console.log(students);
-        createStdList();
-        document.querySelector('#student_no').value = '';
-        document.querySelector('#student_name').value = '';
-        document.querySelector('#score').value = '';
-    });
+//         if (sno == '' || sname == '' || score == '') {
+//             alert('값을 입력하세요');
+//             return;
+//         }
+//         students[students.length] = {
+//             stdNo: sno,
+//             stdName: sname,
+//             score: score
+//         };
+//         console.log(students);
+//         createStdList();
+//         document.querySelector('#student_no').value = '';
+//         document.querySelector('#student_name').value = '';
+//         document.querySelector('#score').value = '';
+//     });
 
-document.querySelector('.addBtn')
-    .addEventListener('click', function () {
-        let sno = document.querySelector('#student_no').value;
-        let score = document.querySelector('#score').value;
-        let nodeList = document.querySelectorAll('#list tbody tr');
-        for (let i = 0; i < nodeList.length; i++) {
-            if (nodeList[i].children[0].innerHTML == sno) {
-                nodeList[i].children[2].innerHTML = score;
-            }
-        }
-    });
+// document.querySelector('.addBtn')
+//     .addEventListener('click', function () {
+//         let sno = document.querySelector('#student_no').value;
+//         let score = document.querySelector('#score').value;
+//         let nodeList = document.querySelectorAll('#list tbody tr');
+//         for (let i = 0; i < nodeList.length; i++) {
+//             if (nodeList[i].children[0].innerHTML == sno) {
+//                 nodeList[i].children[2].innerHTML = score;
+//             }
+//         }
+//     });
 
-function createStdList() {
-    let str = ``;
-    for (let i = 0; i < students.length; i++) {
-        str += `
-        <tr onclick='showInfo(event)'>
-            <td>${students[i].stdNo}</td>
-            <td>${students[i].stdName}</td>
-            <td>${students[i].score}</td>
-            <td>
-                <button class='btn btn-danger' onclick='removeRow(event)'>삭제</button>
-            </td>
-        </tr>`;
-    }
-    document.querySelector('#list tbody').innerHTML = str;
-}
-createStdList();
-console.log(document.querySelectorAll('button'));
+// function createStdList() {
+//     let str = ``;
+//     for (let i = 0; i < students.length; i++) {
+//         str += `
+//         <tr onclick='showInfo(event)'>
+//             <td>${students[i].stdNo}</td>
+//             <td>${students[i].stdName}</td>
+//             <td>${students[i].score}</td>
+//             <td>
+//                 <button class='btn btn-danger' onclick='removeRow(event)'>삭제</button>
+//             </td>
+//         </tr>`;
+//     }
+//     document.querySelector('#list tbody').innerHTML = str;
+// }
+// createStdList();
+// console.log(document.querySelectorAll('button'));
 
-function removeRow(e) {
-    e.target.parentElement.parentElement.remove();
-}
+// function removeRow(e) {
+//     e.target.parentElement.parentElement.remove();
+// }
 
-function showInfo(e) {
-    document.querySelector('#student_no').value = e.target.parentElement.children[0].innerHTML;
-    document.querySelector('#student_name').value = e.target.parentElement.children[1].innerHTML;
-    document.querySelector('#score').value = e.target.parentElement.children[2].innerHTML;
-}
+// function showInfo(e) {
+//     document.querySelector('#student_no').value = e.target.parentElement.children[0].innerHTML;
+//     document.querySelector('#student_name').value = e.target.parentElement.children[1].innerHTML;
+//     document.querySelector('#score').value = e.target.parentElement.children[2].innerHTML;
+// }

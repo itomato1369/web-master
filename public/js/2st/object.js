@@ -32,9 +32,9 @@ for (let prop in students[0]) {
 document.querySelector('#addBtn')
     .addEventListener('click', function () {
     const newElement = {
-        stdNo: 300, //document.querySelector('#student_no').value,
-        stdName: '안녕', //document.querySelector('#student_name').value,
-        score: 54 //document.querySelector('#score').value,
+        stdNo: document.querySelector('#student_no').value,
+        stdName: document.querySelector('#student_name').value,
+        score: document.querySelector('#score').value,
     }
     let tr = makeTr(newElement);
     document.querySelector('#list tbody').appendChild(tr);
