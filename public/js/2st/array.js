@@ -98,7 +98,6 @@
 //     if (idx % 2 == 0) {
 //         sum += item;
 //     }
-
 // });
 // console.log(`sum의 값은 ${sum}`);
 
@@ -124,7 +123,7 @@
 // friends.push({
 //     name: '최우식',
 //     phone: '010-1251-8563'
-// })
+// });
 
 // let search = prompt('연락처를찾을 친구의 이름을 입력')
 

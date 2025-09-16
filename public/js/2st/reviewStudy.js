@@ -164,5 +164,137 @@ const obj = {
 }
 console.log(obj);
 
-const fruits = ['사과','복숭아','수박','딸기'];
-fruits [fruits.length] = '배';
+const fruits = ['사과', '복숭아', '수박', '딸기'];
+fruits[fruits.length] = '배'; // 마지막에 추가
+fruits[fruits.length] = '참외'; // 마지막에 추가
+fruits[0] = '포도';
+fruits.push(`메론`); //추가하고 length추가 
+delete fruits[0];
+fruits.unshift(`굴비`);
+console.log(fruits);
+
+fruits.splice(1, 1); //index 위치 , 삭제할 갯수
+fruits.splice(0, 0, '거봉');
+for (let i = 0; i < fruits.length; i++) {
+    console.log(fruits[i]);
+}
+const numAry = new Array();
+numAry.push(10);
+numAry.push(25);
+numAry.push(34);
+numAry.push(47);
+numAry.splice(0, 0, 33);
+console.log(numAry);
+
+let sum = 0;
+numAry.forEach(function (item, idx, ary) {
+    console.log(item);
+    if (item % 2 == 1) {
+        sum += item;
+    }
+});
+console.log(`sum의 값은 ${sum}`);
+
+numAry.forEach(function (item, idx, ary) {
+    console.log(idx);
+    if (idx % 2 == 0) {
+        sum += item;
+    }
+});
+
+
+const friends = [{
+    name: 'rae',
+    phone: '010-124-124'
+}];
+friends.push({
+    name: 'wef',
+    phone: '010-243-124'
+});
+friends.push({
+    name: 'rew',
+    phone: '010-223-131'
+});
+
+friends.forEach(function (item, idx, ary) {
+    if (idx == 0) {
+        console.log(`이름은 ${item.name}`);
+    }
+});
+
+console.log(['오렌지', '감', '사과', '수박', '당근'].sort());
+console.log([10, 421, 32, 64, 26, 513].sort(function (a, b) {
+    if (a < b) {
+        return -1;
+    } else {
+        return 0;
+    }
+}));
+
+const now = new Date();
+console.log(now.toLocaleDateString());
+console.log(now.toLocaleTimeString());
+
+// let today = new Date('2025-09-15 10:30:30');
+today.setFullYear(2024);
+today.setMonth(8); // 9월
+console.log(today.toLocaleDateString());
+console.log(today.getFullYear());
+console.log('월:' + (today.getMonth() + 1));
+console.log('일:' + today.getDate());
+console.log('요일:' + today.getDay());
+
+function translateDay(dateStr) {
+    let dayAry = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일']
+    let today = new Date(dateStr);
+    let day = today.getDay();
+    return dateStr + '은' + dayAry[day] + '입니다';
+}
+console.log(translateDay('2025-10-01'));
+
+// let tr = document.createElement('tr');
+// for (let d = 1; d <=31; d++) {
+//     let td = document.createElement('td');
+//     td.innerHTML = d;
+//     tr.appendChild(td);
+//     if(d % 7 == 0) {
+//         tr = document.createElement('tr');
+//     }
+//     document.querySelector('tbody').appendChild(tr);
+// }
+
+// let spaces = 0;
+// let tr = document.createElement('tr');
+for (let d = 1; d <= 31; d++) {
+    let td = document.createElement('td');
+    td.innerHTML = d;
+    tr.appendChild(td);
+    if (d % 7 == 0) {
+        tr = document.createElement('tr');
+    }
+    document.querySelector('tbody').appendChild(tr);
+}
+for (let s = 0; s < spaces; s++) {
+    let td = document.createElement('td');
+    tr.appendChild(td);
+}
+let yyyy = 2025,
+    mm = 9;
+let today = new Date();
+today.setFullYear(yyyy);
+today.setMonth(mm - 1);
+today.setDate(1);
+
+let spaces = today.getDay();
+today.setMonth(mm);
+let lastDate = new Date(today.getTime() - (1000 * 60 * 60 * 24));
+lastDate = lastDate.getDate();
+
+let caption = document.createElement('caption');
+caption.innerHTML = `${yyyy}년/ ${mm}월`
+
+let tr = document.createElement('caption');
+for (let s = 0; s < spaces; s++) {
+    let td = document.createElement('td');
+    td.innerHTML = d;
+}
