@@ -11,14 +11,29 @@
 //     console.log(fruits[i]);
 // }
 
-// let students = [{stdNo: 100, stdName: "김민기", score: 80},
-//     {stdNo: 200, stdName: "김민우", score: 70},
-//     {stdNo: 300, stdName: "김민지", score: 85}
+// let students = [{
+//         stdNo: 100,
+//         stdName: "김민기",
+//         score: 80
+//     },
+//     {
+//         stdNo: 200,
+//         stdName: "김민우",
+//         score: 70
+//     },
+//     {
+//         stdNo: 300,
+//         stdName: "김민지",
+//         score: 85
+//     }
 // ];
+
 // let str = `<ul>`;
 // for (let i = 0; i < 3; i++) {
 //     console.log(students[i].score);
-//     str += `<li>학생번호: ${students[i].stdNo}, 이름: ${students[i].stdName}</li>`;
+//     str += `<li>학생번호: ${students[i].stdNo}, 
+//                 이름: ${students[i].stdName}
+//             </li>`;
 // }
 // str += `</ul>`;
 // document.writeln(str);
@@ -78,14 +93,14 @@
 // // });
 // // console.log(`sum의 값은 ${sum}`)
 
-// // numAry.forEach(function (item, idx, ary) {   // 배열에 있는 요소, 인덱스, 배열자신
-// //    console.log(idx);
-// //     if (idx % 2 == 0) {
-// //         sum += item;
-// //     }
+// numAry.forEach(function (item, idx, ary) {   // 배열에 있는 요소, 인덱스, 배열자신
+//    console.log(idx);
+//     if (idx % 2 == 0) {
+//         sum += item;
+//     }
 
-// // });
-// // console.log(`sum의 값은 ${sum}`);
+// });
+// console.log(`sum의 값은 ${sum}`);
 
 // numAry.forEach(function (item, idx, ary) {   // 배열에 있는 요소, 인덱스, 배열자신
 //    console.log(idx);
@@ -95,6 +110,7 @@
 //     }
 // });
 // console.log(`sum의 값은 ${sum}`);
+
 
 // array3
 // const friends = [{
@@ -112,7 +128,7 @@
 
 // let search = prompt('연락처를찾을 친구의 이름을 입력')
 
-// ㄴ
+// 
 // friends.forEach(function(item, idx, ary) { //배열
 //     if(idx == 1) {
 //         console.log(`이름은 ${item.name}`);

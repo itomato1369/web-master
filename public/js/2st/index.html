@@ -10,15 +10,34 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous">
     </script>
-</head>
     <style>
-        body {
-            text-align: center;
+        .saturday{
+            background-color: blue;
+            color: white;
         }
+        .sunday{
+            background-color: red;
+            color: white;
+        }
+        .outer {
+        width: 800px;
+        height: 300px;
+        background-color: yellow;
+      }
+      .outer > .inner {
+        display: inline-block;
+        width: 90px;
+        height: 30px;
+        background-color: aqua;
+        color: red;
+        margin: 2px;
+        text-align: center;
+        line-height: 30px;
+      }
     </style>
-
+</head>
 <body>
-    <h1>event</h1>
+    <!-- <h1>event</h1>
     <div id="student">
         <table class="table">
             <tbody>
@@ -57,8 +76,29 @@
             </thead>
             <tbody> </tbody>
         </table>
+    </div> -->
+    <div>
+        <h3>배열, 메소드</h3>
+        <table border="2">
+            <thead>
+                <tr>
+                    <th>일</th>
+                    <th>월</th>
+                    <th>화</th>
+                    <th>수</th>
+                    <th>목</th>
+                    <th>금</th>
+                    <th>토</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
     </div>
-
+    <input type="text" id="user_value">
+    <button id="search_word">찾기</button>
+    <div class="outer"> </div>
     <!-- <script src="data.js"></script> -->
-    <script src="date.js"></script>
+    <script src="calendar.js"></script>
 </body>
+</html>

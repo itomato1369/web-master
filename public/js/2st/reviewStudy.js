@@ -155,3 +155,14 @@
 //     document.querySelector('#student_name').value = e.target.parentElement.children[1].innerHTML;
 //     document.querySelector('#score').value = e.target.parentElement.children[2].innerHTML;
 // }
+const obj = {
+    name: 'rrr',
+    age: 12,
+    showInfo: function () {
+        return `이름은 ${obj.name}, 나이는 ${obj.age}`;
+    }
+}
+console.log(obj);
+
+const fruits = ['사과','복숭아','수박','딸기'];
+fruits [fruits.length] = '배';
