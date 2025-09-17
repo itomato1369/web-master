@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        data-container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 30px;
+            border-radius: 12px;
+            background: #f9f9f9;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        /* 폼 요소 */
+        .data-container form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        /* 입력창 스타일 */
+        .data-container input[type="text"] {
+            padding: 12px 15px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .data-container input[type="text"]:focus {
+            border-color: #007bff;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
+        }
+
+        /* 버튼 스타일 */
+        .data-container input[type="submit"] {
+            padding: 12px 15px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .data-container input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f6f8;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .data-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .data-container>div {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: transform 0.2s ease;
+        }
+
+        .data-container>div:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .data-id {
+            font-weight: bold;
+            color: #6c63ff;
+            margin-right: 15px;
+        }
+
+        .data-title {
+            flex-grow: 1;
+            color: #333;
+            font-size: 1.1em;
+        }
+
+        .data-author {
+            font-style: italic;
+            color: #888;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container" id="container">
+        <form action="index.html" method="post">
+            <input type="text" name="title" placeholder="Enter title">
+            <input type="text" name="author" placeholder="Enter author">
+            <input type="submit" value="추가">
+        </form>
+        <div class="data-container" id="data-container">
+            <!-- <div id="list">
+                <span class="data-id">1</span>
+                <span class="data-title">Test1</span>
+                <span class="data-author">user01</span>
+            </div> -->
+        </div>
+    </div>
+
+    <script src="./db.js"></script>
+</body>
+
+</html>

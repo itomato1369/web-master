@@ -1,0 +1,12 @@
+{
+    "posts" : [{
+        "id": 1,
+        "title": "json test",
+        "author": "user01"
+    }],
+    "comments" : [{
+        "id": 1,
+        "content": "1번글의 댓글",
+        "postId": 1
+    }]
+}

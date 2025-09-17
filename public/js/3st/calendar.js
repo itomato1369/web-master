@@ -68,7 +68,8 @@
 // setInterval
 document.querySelector('table').remove();
 
-let str = `Lorem dolores!`;
+let str = `Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatem quasi, accusantium repellat nostrum doloremque rerum debitis necessitatibus laboriosam vitae dicta, quos temporibus tenetur sapiente, sunt impedit soluta reprehenderit? Consequuntur, qui.
+`;
 let strAry = str.split(' '); // 공백을 기준으로 문자열 배열로 생성.
 const outer = document.querySelector('div.outer');
 strAry.forEach(function (item, idx, ary) {
@@ -81,21 +82,19 @@ strAry.forEach(function (item, idx, ary) {
     // console.log(outer.appendChild(div));
 });
 
-document.querySelector('#search_word').addEventListener('click', function (item) {
-    let search = document.querySelector('#user_value').value;
-    document.querySelectorAll('div.inner').forEach(function (item) {
-        if (item.innerHTML == search){
-            item.remove();
-        }
-    });
-});
-
+// document.querySelector('#search_word').addEventListener('click', function (item) {
+//     let search = document.querySelector('#user_value').value;
+//     document.querySelectorAll('div.inner').forEach(function (item) {
+//         if (item.innerHTML == search){
+//             item.remove();
+//         }
+//     });
+// });
 document.querySelector('#search_word').addEventListener('click', function (item) {
     let search = document.querySelector('#user_value').value;
     if (item.innerHTML == search) {
         item.remove();
     }
-
     let is_exist = false;
     document.querySelectorAll('div.inner').forEach(function (item){
         if (item.innerHTML == search) {
@@ -111,12 +110,12 @@ document.querySelector('#search_word').addEventListener('click', function (item)
     document.querySelector('#user_value').value = ' ';
     console.log(document.querySelectorAll('div.inner').length);
 });
+
 // alert('성공') alert('실패');
 
-
-let timing = 60;
-setInterval(function () {
-    console.log(timing--);
-},1000);
+// let timing = 60;
+// setInterval(function () {
+//     console.log(timing--);
+// },1000);
 
     
