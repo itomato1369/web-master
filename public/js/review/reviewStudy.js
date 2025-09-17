@@ -202,7 +202,6 @@
 //     }
 // });
 
-
 // const friends = [{
 //     name: 'rae',
 //     phone: '010-124-124'
@@ -298,3 +297,179 @@
 //     let td = document.createElement('td');
 //     td.innerHTML = d;
 // }
+// var fruits = ['apple','banana','orange'];
+// for (var i = 0; i < fruits.length; i++) {
+//     console.log(fruits[i]);
+// }
+
+// var usename = "Alberto Montalesi";
+
+// let username = "Alberto Montalesi";
+// const username = "Alberto MOntalesi";  // let 과 const는 겹칠 수 없다
+// const age = 26;   // const로 선언한 값에는 새로운 값을 추가할 수 없다
+// age = 27;
+let height = 190;
+height = 188; // let 은 새로운 값 재설정은 할 수 있지만 
+
+// let width = 12;
+// let width = 144;   //이건 안됨
+
+// var userID;
+// userID = 12;
+// console.log(typeof userID); // number 
+// userID = 'user1';
+// console.log(typeof userID); // string 문자열
+
+// let userName = "Alberto";
+// console.log(userName);
+
+// let age = 25;
+// let married = false;
+// console.log();
+
+// const car = {
+//     wheels: 4,
+//     color: "red",
+// };
+// const car = {
+//     wheels: 4,
+//     color: "red",
+//     drive: function () {
+//         console.log("wroom wroom");
+//     }
+// };
+// car.drive();   //car에 있는 drive 객체에 소속되어있는 method
+
+
+// const car = {} // 빈 객체를 생성
+// car.color = 'red';
+// console.log(car);
+
+// const car = {
+//     wheels: 4,
+//     color: "red",
+// };
+// console.log(car.wheels);
+// console.log(car.color);
+
+// const car = {
+//     wheels: 4,
+//     color: "red",
+//     "goes fast": true 
+// };
+// console.log(car["goes fast"]);  // 여러 단어로 된 속성 []로 묶음
+
+// const cars = {
+//     ferrari: "california",
+//     porshe: "911",
+//     bugatti: "veyron"
+// };
+// const key = "ferrari";
+// console.log(cars[key]);   // 변수에 저장된 객체의 속성에 접근하려면 []
+
+// let car = {
+//     color: 'red',
+// };
+// let secondCar = car; // car 에 대한 참조 주소를 저장
+
+// let car = {color: 'red'};
+// let secondCar = car;
+// car.wheels = 4;
+
+// console.log(car);
+// console.log(secondCar);
+// console.log(car == secondCar);
+// console.log(car === secondCar);
+
+// const emptyObj1 = {};
+// const emptyObj2 = {};
+// console.log(emptyObj1 == emptyObj2);
+// console.log(emptyObj1 === emptyObj2); // 빈 객체 끼리는 false 동일한 속성이라도 객체가 같아야함
+// // 객체와 변수의차이 
+// 변수 (Variable)
+// 역할: 데이터를 저장할 수 있는 '이름' 또는 '메모리 공간'을 가리킵니다. 
+// 저장 방식: 원시 타입(숫자, 문자열 등)의 데이터를 변수에 할당하면 해당 값이 변
+// 수에 직접 저장됩니다. 
+// 예시: let name = "홍길동"; 에서 name은 변수이며, 
+// `"홍길동"`이라는 문자열 값을 저장하고 있습니다. 
+// 객체 (Object)
+// 역할: 여러 개의 데이터를 하나의 단위로 묶어 관리할 수 있는 데이터 타입입니다. 
+// 구조: `키(key)`와 `값(value)`의 형태로 데이터를 포함하며,
+//  각 키는 고유한 이름을 가지고 있습니다. 
+// 저장 방식: 객체를 변수에 할당하면, 객체 자체의 값이 아니라 
+// 객체가 저장된 메모리 주소(참조 값)가 변수에 저장됩니다. 
+// 예시: let person = { name: "홍길동", age: 30 }; 에서 person은 변수이고,
+//  이 변수는 name과 age라는 두 개의 키와 그에 해당하는 값("홍길동", 30)을 
+// 가진 객체를 참조하고 있습니다. 
+// const obj1 = {a: 1};
+// const obj2 = obj1;
+// console.log(obj1 == obj2);
+// console.log(obj1 === obj2);
+
+// const fruitBasket = ['apple','banana','orange']; // 배열에 접근할 때는 index를 사용 index는 0부터 시작
+// console.log(fruitBasket[0]);
+// console.log(fruitBasket[1]);
+// console.log(fruitBasket[2]);
+// console.log(fruitBasket[3]);
+
+// console.log(fruitBasket.length);   // .length index의 크기 길이를 확인
+// fruitBasket.push('pear'); // 배열 마지막에 값 하나 추가
+// console.log(fruitBasket); // 배열확인
+// fruitBasket.unshift('melon'); // 배열의 시작에 값 하나 추가
+// console.log(fruitBasket); // 배열확인
+// fruitBasket.pop(); // 배열의 끝에서 값 하나를 제거
+// console.log(fruitBasket); // 배열확인
+// fruitBasket.shift(); // 배열의 시작에서 값 하나를 제거
+// console.log(fruitBasket);
+
+// const str = "hello";
+// console.log(typeof(str));  // string 배열
+// const num = 12;
+// console.log(typeof(num));
+// const arr = [1,2,3];
+// console.log(typeof(arr)); // object 객체   arry 배열은 객체다.
+
+// console.log(typeof(null));
+
+// function greet(name) {
+//     console.log("hello " + name);
+// }
+// greet("ef");
+
+// let myInt = 1;
+// function increase(value) {
+//     return value += 1;
+// }
+// console.log(myInt);
+// console.log(increase(myInt));
+// console.log(myInt);
+
+let myCar = {
+    maker: "bmw",
+    color: "red"
+};
+console.log(myCar);
+
+function changeColor(car) {
+    car.color = "blue";
+}
+changeColor(myCar);
+console.log(myCar);
+
+// const greeter = function greet(name) {
+//     console.log("hello " + name);
+// };
+
+var myInt = 1;
+if (myInt === 1) {
+    var mySecondInt = 2;
+    console.log(mySecondInt);
+}
+console.log(mySecondInt);
+var myInt = 1;
+if (myInt === 1) {
+    let mySecondInt = 2;
+    console.log(mySecondInt);
+}
+console.log(mySecondInt);
+

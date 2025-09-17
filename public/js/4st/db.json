@@ -1,12 +1,116 @@
 {
-    "posts" : [{
-        "id": 1,
-        "title": "json test",
-        "author": "user01"
-    }],
-    "comments" : [{
-        "id": 1,
-        "content": "1번글의 댓글",
-        "postId": 1
-    }]
+  "posts": [
+    {
+      "id": "1",
+      "title": "json test",
+      "author": "user01"
+    },
+    {
+      "id": "65cd",
+      "title": "",
+      "author": ""
+    },
+    {
+      "id": "e124",
+      "title": "",
+      "author": ""
+    },
+    {
+      "id": "ed55",
+      "title": "",
+      "author": ""
+    },
+    {
+      "id": "bc8d",
+      "title": "",
+      "author": ""
+    },
+    {
+      "id": "14ac",
+      "title": "",
+      "author": ""
+    },
+    {
+      "id": "1da9",
+      "title": "",
+      "author": ""
+    },
+    {
+      "id": "c1fe",
+      "title": "",
+      "author": ""
+    },
+    {
+      "id": "694f",
+      "title": "",
+      "author": ""
+    },
+    {
+      "id": "ef33",
+      "title": "",
+      "author": ""
+    },
+    {
+      "id": "5e8d",
+      "title": "",
+      "author": ""
+    },
+    {
+      "id": "b967",
+      "title": "",
+      "author": ""
+    },
+    {
+      "id": "c2f7",
+      "title": "",
+      "author": ""
+    },
+    {
+      "id": "e759",
+      "title": "",
+      "author": ""
+    },
+    {
+      "id": "3590",
+      "title": "",
+      "author": ""
+    },
+    {
+      "id": "7433",
+      "title": "",
+      "author": ""
+    },
+    {
+      "id": "ef17",
+      "title": "",
+      "author": ""
+    },
+    {
+      "id": "b05d",
+      "title": "",
+      "author": ""
+    },
+    {
+      "id": "626d",
+      "title": "",
+      "author": ""
+    },
+    {
+      "id": "4796",
+      "title": "",
+      "author": ""
+    },
+    {
+      "id": "60ea",
+      "title": "",
+      "author": ""
+    }
+  ],
+  "comments": [
+    {
+      "id": "1",
+      "content": "1번글의 댓글",
+      "postId": 1
+    }
+  ]
 }
