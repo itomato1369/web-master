@@ -308,8 +308,8 @@
 // const username = "Alberto MOntalesi";  // let 과 const는 겹칠 수 없다
 // const age = 26;   // const로 선언한 값에는 새로운 값을 추가할 수 없다
 // age = 27;
-let height = 190;
-height = 188; // let 은 새로운 값 재설정은 할 수 있지만 
+// let height = 190;
+// height = 188; // let 은 새로운 값 재설정은 할 수 있지만 
 
 // let width = 12;
 // let width = 144;   //이건 안됨
@@ -444,32 +444,206 @@ height = 188; // let 은 새로운 값 재설정은 할 수 있지만
 // console.log(increase(myInt));
 // console.log(myInt);
 
-let myCar = {
-    maker: "bmw",
-    color: "red"
-};
-console.log(myCar);
+// let myCar = {
+//     maker: "bmw",
+//     color: "red"
+// };
+// console.log(myCar);
 
-function changeColor(car) {
-    car.color = "blue";
-}
-changeColor(myCar);
-console.log(myCar);
+// function changeColor(car) {
+//     car.color = "blue";
+// }
+// changeColor(myCar);
+// console.log(myCar);
 
 // const greeter = function greet(name) {
 //     console.log("hello " + name);
 // };
 
-var myInt = 1;
-if (myInt === 1) {
-    var mySecondInt = 2;
-    console.log(mySecondInt);
-}
-console.log(mySecondInt);
-var myInt = 1;
-if (myInt === 1) {
-    let mySecondInt = 2;
-    console.log(mySecondInt);
-}
-console.log(mySecondInt);
+// var myInt = 1;
+// if (myInt === 1) {
+//     var mySecondInt = 2;
+//     console.log(mySecondInt);
+// }
+// console.log(mySecondInt);
+// var myInt = 1;
+// if (myInt === 1) {
+//     let mySecondInt = 2;
+//     console.log(mySecondInt);
+// }
+// let myInt = 1;
 
+// function increase(value) {
+//     return value += 1;
+// }
+// console.log(myInt);
+// console.log(increase(myInt));
+// let myCar = {
+//     maker: "bmw",
+//     color: "red"
+// };
+// console.log(myCar);
+
+// const changeColor = (car) => {
+//     car.color = "blue";
+//     car.maker = "toyota";
+// };
+// changeColor(myCar);
+// console.log(myCar.color);
+
+// // const greeter = function greet(name) {
+// //     console.log("hello " + name);
+// // };
+// // greeter("olleh");
+
+// const greeter = (name) => {
+//     console.log("hello " + name);   // 문자열과 숫자는 + 할 수 없음
+// };
+// greeter("");
+
+// const myInt1 = 1;
+
+// if (myInt1 == 1) {
+//     let mySecondInt = 2;
+//     console.log(mySecondInt);
+// }
+// console.log(myInt1);
+
+// const myInt = 1;
+
+// if (myInt === 1) {
+//     let mySecondInt = 2;
+//     console.log(mySecondInt);
+// }
+
+// var myInt = 1;
+// if (myInt === 1) {
+//     let mySecondInt = 2;
+//     console.log(mySecondInt);
+// }
+// const myCar = {
+//     color: 'red',
+//     logColor: function() {
+//         console.log(this.color);  // this는 myCar
+//     }
+// };
+// myCar.logColor();
+
+// function logThis() {
+//     console.log(this);
+// }
+// logThis();
+
+// const myCar = {
+//     color: 'red',
+//     logColor: function() {
+//         console.log(this.color);
+//     },
+// };
+// const unboundGetColor = myCar.logColor;
+// console.log(unboundGetColor());
+// const boundGetColor = unboundGetColor.bind(myCar);
+// console.log(boundGetColor());
+
+// for (var i = 0; i < 10; i++) {
+//     var leak = 'I am available outside of the loop';
+// }
+// console.log(leak);
+
+// function myFunc() {
+//     var functionScoped = 'I am available inside this function';
+//     console.log(functionScoped);
+// }
+// myFunc();
+
+// let x = 'global';
+// if (x === 'global') {
+//     let x = 'block-scoped';
+//     console.log(x);
+// }
+// console.log(x);
+
+// 0918 과제 Array.from() 예습   객체를 받아 배열로 변환
+// const fruits = document.querySelectorAll('.fruits p');
+// //클래스가 fruits에  3개의 p태그 포함하여 다 가지고 오겠다
+// const fruitArray = Array.from(fruits); // fruits를 배열로 변환
+// console.log(fruitArray);
+// const fruitNames = fruitArray.map(fruit => fruit.textContent);
+// // 위에서 배열로 바꿨으니 map()을 사용할 수 있다
+// console.log(fruitNames);
+
+// const fruits = Array.from(document.querySelectorAll('.fruits p'));
+// const fruitNames = fruits.map(fruit => fruit.textContent);  
+// // .textContent 는 순수한 텍스트 콘텐츠만 가져오거나 설정
+// console.log(fruitNames);
+
+// const fruits = document.querySelectorAll('.fruits p');
+// const fruitArray = Array.from(fruits, fruit => {
+//     console.log(fruit);
+//     return fruit.textContent;
+// });
+// console.log(fruitArray);
+
+// const digits = Array.of(1, 2, 3, 4, 5); 
+// // Array.of()는 전달 받은 모든 인수로 배열을 생성한다
+// console.log(digits);
+
+// const array = [1,2,3,4,5];
+// // 배열의 원소 중 3보다 큰 첫 원소를 반환한다
+// let found = array.find(e => e > 3);
+// console.log(found);
+
+// // Array.findIndex() 조건과 일치하는 첫 번째 원소의 인덱스를 반환한다
+// const greetings = ['hello','hi','byebye','goodbye','hi'];
+// let foundIndex = greetings.findIndex(e => e === 'hi');
+// console.log(foundIndex);
+
+// const array = [1, 2, 3, 4, 5, 6, 1, 2, 3, 1];
+// let arraySome = array.some(e => e > 2);
+// console.log(arraySome);
+
+// let arrayEvery = array.every(e => e > 2);
+// console.log(arrayEvery);
+// // 2보다 큰 원소가 존재하지만 모든 원소가 2보다 크지는 않기 때문에 false 
+
+const greetings = ['hello', 'hi', 'byebye', 'goodbye', 'hi'];
+let foundIndex = greetings.findIndex(e => e === 'hi');
+console.log(foundIndex);
+// 조건과 일치하는 첫 번째 원소의 인덱스만 반환
+
+const array = [1, 2, 3, 4, 5, 6, 1, 2, 3, 1];
+let arraySome = array.some(e => e > 2);
+console.log(arraySome);
+
+let arrayEvery = array.every(e => e > 2);
+console.log(arrayEvery);
+
+console.log(i);
+var i = 'I am a variable';    
+// var 는 정의되기 전에 접근 할 수 있지만 그 값에는 접근할 수 없다
+
+let j = 'I am a let';
+console.log(j);
+
+var greeting = 'Hello';
+greeting = 'Farewell';
+for (var i = 0; i < 2; i++) {
+    var greeting = 'Good morning';
+}
+console.log(greeting);
+
+let value = 1;
+if (true) {
+    let value = 2;
+    console.log(value);
+}
+value = 3;
+
+let x = 100;
+if (x > 50) {
+    let x = 10;
+}
+console.log(x);
+
+console.log(constant);
+const constant = 1;
