@@ -1,0 +1,101 @@
+#add-student {
+  background: #ffffff;
+  padding: 30px 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 360px;
+}
+
+#add-student form {
+  display: flex;
+  flex-direction: column;
+}
+
+#add-student label {
+  margin-top: 15px;
+  font-weight: bold;
+  color: #333;
+}
+
+#add-student input[type="text"],
+#add-student input[type="number"] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  margin-top: 5px;
+  transition: border-color 0.3s;
+}
+
+#add-student input[type="text"]:focus,
+#add-student input[type="number"]:focus {
+  border-color: #007BFF;
+  outline: none;
+}
+
+#add-student input[type="submit"] {
+  margin-top: 25px;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#add-student input[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+#data-container {
+  /* Use flexbox for a single-line layout */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  /* Adds space between each student's row */
+}
+
+#data-container div {
+  /* Use flexbox for the individual student rows */
+  display: flex;
+  align-items: center;
+  /* Vertically aligns items in the row */
+  background-color: #f4f4f4;
+  /* Light gray background for rows */
+  padding: 10px;
+  border-radius: 5px;
+  /* Rounded corners */
+  border: 1px solid #ddd;
+  /* A subtle border */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  /* Adds a soft shadow */
+}
+
+#data-container span {
+  /* Give each span some space and a consistent size */
+  padding: 0 10px;
+}
+
+.data-sno {
+  /* Style for the student number */
+  font-weight: bold;
+  color: #337ab7;
+  /* A nice blue color */
+}
+
+.data-sname {
+  /* Style for the student name */
+  flex-grow: 1;
+  /* Allows the name to take up available space */
+  font-weight: 500;
+}
+
+.data-score {
+  /* Style for the student score */
+  font-weight: bold;
+  color: #5cb85c;
+  /* A nice green color for scores */
+  font-size: 1.1em;
+}

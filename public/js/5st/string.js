@@ -70,17 +70,13 @@
 // let hello = "Hi";
 // console.log(hello.repeat(12)); // 몇 번 반복할거냐
 
+
 function getGender(no) {
     //  주민번호의 성별 뒷자리 중 첫번째 값
     if (no.length == 13) {
-        
     }
 
-
-
-
 };
-
 
 const numAry = ['990101-1235464', '010322-3234531', '9830423456721'];
 numAry.forEach((item) => {

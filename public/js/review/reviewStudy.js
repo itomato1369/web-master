@@ -606,10 +606,10 @@
 // console.log(arrayEvery);
 // // 2보다 큰 원소가 존재하지만 모든 원소가 2보다 크지는 않기 때문에 false 
 
-const greetings = ['hello', 'hi', 'byebye', 'goodbye', 'hi'];
-let foundIndex = greetings.findIndex(e => e === 'hi');
-console.log(foundIndex);
-// 조건과 일치하는 첫 번째 원소의 인덱스만 반환
+// const greetings = ['hello', 'hi', 'byebye', 'goodbye', 'hi'];
+// let foundIndex = greetings.findIndex(e => e === 'hi');
+// console.log(foundIndex);
+// // 조건과 일치하는 첫 번째 원소의 인덱스만 반환
 
 const array = [1, 2, 3, 4, 5, 6, 1, 2, 3, 1];
 let arraySome = array.some(e => e > 2);
@@ -625,12 +625,12 @@ var i = 'I am a variable';
 let j = 'I am a let';
 console.log(j);
 
-var greeting = 'Hello';
-greeting = 'Farewell';
-for (var i = 0; i < 2; i++) {
-    var greeting = 'Good morning';
-}
-console.log(greeting);
+// var greeting = 'Hello';
+// greeting = 'Farewell';
+// for (var i = 0; i < 2; i++) {
+//     var greeting = 'Good morning';
+// }
+// console.log(greeting);
 
 let value = 1;
 if (true) {
@@ -645,5 +645,27 @@ if (x > 50) {
 }
 console.log(x);
 
-console.log(constant);
-const constant = 1;
+// console.log(constant);
+// const constant = 1;
+
+// 함수 간략하게 줄이는 법
+// const greeting = function (name) {
+//     return 'hello ' + name;
+// };
+// // console.log(greeting);
+// console.log(greeting('안녕'));
+
+// var greeting = (name) => {
+//     return `hello ${name}`;
+// }
+// console.log(greeting('아침')
+
+const greeting = name => `hello ${name}`;
+const oldFunction = function(name) {
+    return 'hello' + name;
+};
+// const arrowFunction = name => `hello ${name}`;
+const arrowFunction = (name) => {
+    return ``
+
+}

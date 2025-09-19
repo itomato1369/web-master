@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .data-container,
+        .comments {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .data-container>div,
+        .comments>div {
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 15px 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s ease;
+        }
+
+        .data-container>div:hover,
+        .comments>div:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .data-id,
+        .comment-id {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-right: 10px;
+        }
+
+        .data-title {
+            color: #3498db;
+            margin-right: 10px;
+        }
+
+        .data-author {
+            color: #7f8c8d;
+        }
+
+        form {
+            background-color: #ffffff;
+            padding: 30px 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 300px;
+        }
+
+        input[type="text"] {
+            padding: 10px 15px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        input[type="text"]:focus {
+            border-color: #007BFF;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+            outline: none;
+        }
+
+        input[type="submit"],
+        button[type="submit"] {
+            background-color: #007BFF;
+            color: white;
+            font-size: 16px;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .comment-content {
+            color: #2d3436;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <form name="postForm" method="post">
+            <!--name 지정하면 
+            document.querySelector 할 때 쉽게 가져올 수 있다-->
+            <input id="A" type="text" name="title" placeholder="Enter title">
+            <input id="B" type="text" name="author" placeholder="Enter author">
+            <input type="submit" value="추가">
+           
+        </form>
+    </div>
+
+    <!--목록-->
+    <div id="data-container" class="data-container">
+        <span class="userId"></span>
+        <span class="userId"></span>
+        <span class="userId"></span>
+    </div>
+
+
+    <script src="./storage.js"></script>
+</body>
+
+</html>
