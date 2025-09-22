@@ -611,19 +611,19 @@
 // console.log(foundIndex);
 // // 조건과 일치하는 첫 번째 원소의 인덱스만 반환
 
-const array = [1, 2, 3, 4, 5, 6, 1, 2, 3, 1];
-let arraySome = array.some(e => e > 2);
-console.log(arraySome);
+// const array = [1, 2, 3, 4, 5, 6, 1, 2, 3, 1];
+// let arraySome = array.some(e => e > 2);
+// console.log(arraySome);
 
-let arrayEvery = array.every(e => e > 2);
-console.log(arrayEvery);
+// let arrayEvery = array.every(e => e > 2);
+// console.log(arrayEvery);
 
-console.log(i);
-var i = 'I am a variable';    
-// var 는 정의되기 전에 접근 할 수 있지만 그 값에는 접근할 수 없다
+// console.log(i);
+// var i = 'I am a variable';    
+// // var 는 정의되기 전에 접근 할 수 있지만 그 값에는 접근할 수 없다
 
-let j = 'I am a let';
-console.log(j);
+// let j = 'I am a let';
+// console.log(j);
 
 // var greeting = 'Hello';
 // greeting = 'Farewell';
@@ -632,18 +632,18 @@ console.log(j);
 // }
 // console.log(greeting);
 
-let value = 1;
-if (true) {
-    let value = 2;
-    console.log(value);
-}
-value = 3;
+// let value = 1;
+// if (true) {
+//     let value = 2;
+//     console.log(value);
+// }
+// value = 3;
 
-let x = 100;
-if (x > 50) {
-    let x = 10;
-}
-console.log(x);
+// let x = 100;
+// if (x > 50) {
+//     let x = 10;
+// }
+// console.log(x);
 
 // console.log(constant);
 // const constant = 1;
@@ -660,12 +660,41 @@ console.log(x);
 // }
 // console.log(greeting('아침')
 
-const greeting = name => `hello ${name}`;
-const oldFunction = function(name) {
-    return 'hello' + name;
-};
-// const arrowFunction = name => `hello ${name}`;
-const arrowFunction = (name) => {
-    return ``
+// const greeting = name => `hello ${name}`;
+// const oldFunction = function(name) {
+//     return 'hello' + name;
+// };
+// // const arrowFunction = name => `hello ${name}`;
+// const arrowFunction = (name) => {
+//     return ``
 
+// }
+
+// console.log(constant);  // ReferenceError
+// const constant = 1;
+
+const box = document.querySelector(".box");
+box.addEventListener('click', function() {
+    this.classList.toggle('opening');
+    setTimeout(function() {
+        this.classList.toggle('opening');
+    }, 500);
+});
+
+const str = 'this is a short sentence';
+console.log(str.indexOf('is'));
+
+const str1 = 'pizza, orange, cereals';
+console.log(str1.slice(0, 8));  // index 값 0부터 5까지만 출력
+
+const str2 = 'i ate an apple';
+console.log(str.toUpperCase());
+
+const office = {
+    'tom': 'ceo',
+    'mark': 'cto',
+    'bread': 'cio'
+};
+for (person in office) {
+    console.log(person);
 }
