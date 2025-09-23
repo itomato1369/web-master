@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "git/web-master"
+		},
+		{
+			"path": "git/server"
+		},
+		{
+			"path": "C:/Users/admin/Desktop/김동우"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "front"
+	}
+}

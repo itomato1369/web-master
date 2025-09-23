@@ -1,0 +1,63 @@
+{
+  "points": [
+    {
+      "id": "user01",
+      "point": 50
+    },
+    {
+      "id": "user02",
+      "point": 10
+    },
+    {
+      "id": "user03",
+      "point": 40
+    },
+    {
+      "id": "user05",
+      "point": 70
+    },
+    {
+      "id": "user06",
+      "point": 45
+    }
+  ],
+  "posts": [
+    {
+      "id": "1",
+      "title": "json test",
+      "author": "user01"
+    },
+    {
+      "id": "2",
+      "title": "a itest",
+      "author": "user02"
+    },
+    {
+      "id": "3",
+      "title": "b text",
+      "author": "user03"
+    },
+    {
+      "id": "4",
+      "title": "c text",
+      "author": "user04"
+    },
+    {
+      "id": "5",
+      "title": "f test",
+      "author": "user05"
+    },
+    {
+      "id": "6",
+      "title": "z test",
+      "author": "user06"
+    }
+  ],
+  "comments": [
+    {
+      "id": "1",
+      "content": "1번글의 댓글",
+      "postId": 1
+    }
+  ]
+}
