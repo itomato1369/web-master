@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,72 +10,216 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous">
     </script>
-    
+    <style>
+        :root {
+            border-radius: 10px;
+            border: 1px solid #e6e9ee;
+            background: transparent;
+            font-size: 15px;
+            outline: none;
+            box-sizing: border-box;
+            transition: box-shadow .15s, border-color .15s;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: var(--accent);
+            box-shadow: 0 6px 18px rgba(37, 99, 235, 0.08);
+        }
+
+
+        input:invalid {
+            border-color: #ef4444;
+            box-shadow: 0 6px 18px rgba(239, 68, 68, 0.05);
+        }
+
+
+        .full {
+            grid-column: 1 / -1
+        }
+
+
+        .actions {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+            align-items: center;
+            margin-top: 8px;
+            grid-column: 1 / -1;
+        }
+
+
+        button {
+            appearance: none;
+            border: 0;
+            padding: 10px 16px;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            height: 44px;
+        }
+
+
+        .btn-primary {
+            background: var(--accent);
+            color: blue;
+            box-shadow: 0 6px 18px rgba(37, 99, 235, 0.12);
+        }
+
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--muted);
+            border: 1px solid #e6e9ee;
+        }
+
+
+        @media (max-width:640px) {
+            form {
+                grid-template-columns: 1fr
+            }
+
+            .actions {
+                justify-content: stretch;
+                flex-direction: column
+            }
+
+            .actions button {
+                width: 100%
+            }
+        }
+
+
+        /* 작은 helper 스타일 */
+        .hint {
+            font-size: 12px;
+            color: var(--muted);
+            margin-top: 6px
+        }
+    </style>
 </head>
 
 <body>
-    <h3><b>emp Data List</b></h3>
+    <!-- empno, ename, job, hiredate, deptno -->
+
+    <main class="card" role="main">
+        <h1>사원 정보 입력</h1>
+        <p class="lead">사번(empno), 이름(ename), 직무(job), 입사일(hiredate), 부서번호(deptno)를 입력하세요.</p>
+
+        <!-- 서버로 전송할 때 액션(action)을 원하는 엔드포인트로 변경하세요 -->
+        <form action="#" method="post" novalidate>
+
+            <div class="field">
+                <label for="empno">사번 (empno)</label>
+                <input id="empno" name="empno" type="number" inputmode="numeric" min="1" step="1" placeholder="예: 101"
+                    required />
+                <div class="hint">정수만 입력하세요.</div>
+            </div>
+
+
+            <div class="field">
+                <label for="ename">이름 (ename)</label>
+                <input id="ename" name="ename" type="text" maxlength="60" placeholder="예: 홍길동" required />
+            </div>
+
+
+            <div class="field">
+                <label for="job">직무 (job)</label>
+                <!-- datalist로 자주 쓰는 직무를 제시 -->
+                <input id="job" name="job" list="jobList" placeholder="예: MANAGER" required />
+                <datalist id="jobList">
+                    <option value="MANAGER"></option>
+                    <option value="CLERK"></option>
+                    <option value="SALESMAN"></option>
+                    <option value="ANALYST"></option>
+                    <option value="PRESIDENT"></option>
+                </datalist>
+            </div>
+
+
+            <div class="field">
+                <label for="hiredate">입사일 (hiredate)</label>
+                <input id="hiredate" name="hiredate" type="date" placeholder="yyyy-mm-dd" required />
+            </div>
+
+
+            <div class="field">
+                <label for="deptno">부서번호 (deptno)</label>
+                <select id="deptno" name="deptno" required>
+                    <option value="" disabled selected>부서 선택</option>
+                    <option value="10">10 - ACCOUNTING</option>
+                    <option value="20">20 - RESEARCH</option>
+                    <option value="30">30 - SALES</option>
+                    <option value="40">40 - OPERATIONS</option>
+                </select>
+            </div>
+
+
+            <div class="field full">
+                <label for="remarks">비고 (선택)</label>
+                <input id="remarks" name="remarks" type="text" maxlength="200" placeholder="간단한 메모를 적어주세요 (선택)" />
+            </div>
+
+
+            <div class="actions">
+                <button type="reset" class="btn-ghost">초기화</button>
+                <button type="submit" class="btn-primary">저장</button>
+            </div>
+        </form>
+
+
+        <div class="search">
+            <div class="logo">사원</div>
+            <div>
+                <h1 class="title">검색 조건</h1>
+                <p class="subtitle">사원명, 직무, 부서번호로 빠르게 필터링하세요</p>
+            </div>
+        </div>
+        <form id="searchForm" action="#" onsubmit="event.preventDefault();">
+            <div class="field">
+                <label for="ename">사원명</label>
+                <input id="ename1" name="ename1" type="text" placeholder="사원명을 입력하세요 (예: 홍길동)" />
+            </div>
+
+
+            <div class="field">
+                <label for="job">직무</label>
+                <input id="job1" name="job1" type="text" placeholder="직무를 입력하세요 (예: ANALYST)" />
+            </div>
+
+
+            <div class="field">
+                <label for="deptno">부서번호</label>
+                <input id="deptno1" name="deptno1" type="text" inputmode="numeric" pattern="[0-9]*"
+                    placeholder="부서번호(숫자)" />
+            </div>
+
+              <!-- 버튼을 같은 줄에 배치 -->
+            <div id ="actions1">
+                <button class="btn btn-primary" type="submit">🔍 검색</button>
+                <button class="btn btn-ghost small" type="reset" onclick="handleReset();">↺ 초기화</button>
+            </div>
+        </form>
+
+
+        <p class="hint">※ 검색 버튼을 누르면 현재 입력값으로 필터가 적용됩니다. 초기화는 폼을 비웁니다.</p>
+    </main>
     <table class="table">
         <thead>
             <tr>
                 <th>사번</th>
                 <th>이름</th>
                 <th>직무</th>
-                <th>직무</th>
-                <th>삭제</th>
+                <th>급여</th>
+                <th>부서명</th>
+                <th>부서번호</th>
             </tr>
         </thead>
         <tbody id="list"></tbody>
     </table>
 
-    <!-- 웹브라우저 동일리소스 원칙 CORS 원칙-->
-    <!-- http://localhost:5500 클라이언트-->
-    <script>
-        fetch("http://localhost:3000/emp") // 서버
-        .then((response) => response.json())
-        .then((result) => {
-        console.log(result);
-        result.forEach(item => {
-            let tr = makeRow(item);
-            document.querySelector('#list').appendChild(tr);
-        });
-        })
-        .catch((err) => console.log(err));
 
-        function makeRow(employee) {
-            let fields = ['EMPNO','ENAME','JOB','SAL'];
-            let tr = document.createElement("tr");
-            tr.setAttribute("data-eno", employee.EMPNO);
-            fields.forEach((field) => {
-                let td = document.createElement("td");
-                td.innerHTML = employee[field];
-                tr.appendChild(td);
-            });
-            // 삭제버튼
-            let btn = document.createElement("button");
-            btn.innerHTML = '삭제';
-            btn.addEventListener('click', deleteFunc);
-            let td = document.createElement("td");
-            td.appendChild(btn);
-            tr.appendChild(td);
-            return tr;
-        } // end of makeRow
-
-        function deleteFunc(e) {
-            let thisTr = this.parentElement.parentElement;
-            let eno = this.parentElement.parentElement.dataset.eno;
-            fetch("http://localhost:3000/emp/" + eno)
-            .then((response) => response.json())
-            .then((result) => {
-                if(result.rowsAffected) {
-                    alert('성공'); 
-                    thisTr.remove();
-                } else {
-                    alert('실패');
-                }
-            })
-            .catch(err => console.log(err));
-        } 
-    </script> 
+    <script src="emp.js"></script>
 </body>
+
 </html>
