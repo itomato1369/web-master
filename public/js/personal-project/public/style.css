@@ -1,0 +1,176 @@
+/* 기본 설정: 모든 요소의 여백 및 상자 모델 초기화 */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* 참조 사이트의 깔끔함을 반영한 배경 및 중앙 정렬 */
+body {
+    background-color: #f7f7f7; /* 매우 밝은 회색 배경 */
+    color: #333;
+    line-height: 1.6;
+}
+
+#container {
+    max-width: 700px; /* 폼의 최대 너비를 지정하여 중앙에 깔끔하게 배치 */
+    margin: 40px auto; /* 상하 여백 40px, 좌우 자동 (중앙 정렬) */
+    padding: 30px;
+    background-color: #fff; /* 컨테이너 내부를 흰색으로 */
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* 은은한 그림자 */
+}
+
+/* 제목 스타일 */
+h1 {
+    font-size: 28px;
+    color: #5d3f6a; /* 사용자 화면 설계의 보라색 계열 */
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 22px;
+    color: #5d3f6a;
+    border-bottom: 2px solid #5d3f6a;
+    padding-bottom: 5px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+h3 {
+    font-size: 18px;
+    color: #333;
+    margin-top: 25px;
+    margin-bottom: 10px;
+}
+
+/* 안내 문구 및 intro-text 스타일 */
+.intro-text, .guide-text {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #666;
+    font-size: 14px;
+}
+
+.guide-text {
+    text-align: left;
+    font-style: italic;
+    margin-top: -10px; /* 제목과의 간격 조정 */
+}
+
+/* 입력 그룹 스타일 */
+.input-group {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.input-group label {
+    font-weight: bold;
+    margin-bottom: 8px;
+    font-size: 15px;
+}
+
+/* input 및 textarea 스타일 통일 */
+.input-group input[type="text"],
+.input-group input[type="password"],
+.input-group input[type="number"],
+.input-group input[type="email"],
+.input-group input[type="tel"],
+.input-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 16px; /* 모든 입력칸 글꼴 크기 통일 */
+    transition: border-color 0.3s;
+}
+
+/* 포커스 시 테두리 색상 변경 */
+.input-group input:focus,
+.input-group textarea:focus {
+    border-color: #7a5091; /* 포커스 시 보라색 계열로 변경 */
+    outline: none;
+}
+
+/* 라디오 버튼 그룹 정렬 */
+.radio-group label {
+    font-weight: normal;
+    margin-right: 15px;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.radio-group input[type="radio"] {
+    margin-right: 5px;
+}
+
+/* 주소 그룹 버튼 정렬 */
+.address-group {
+    flex-direction: column;
+}
+
+.address-group input {
+    margin-top: 5px;
+}
+
+#postal-search-button {
+    background-color: #888;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    width: 150px;
+    margin-top: 5px;
+    transition: background-color 0.3s;
+}
+
+#postal-search-button:hover {
+    background-color: #666;
+}
+
+/* 구분선 스타일 */
+hr {
+    border: 0;
+    height: 1px;
+    background-color: #eee;
+    margin: 30px 0;
+}
+
+/* 전송/조회 버튼 스타일 (참조 사이트처럼 눈에 띄게) */
+#submit-button, #lookup-button {
+    width: 100%;
+    padding: 15px;
+    margin-top: 20px;
+    background-color: #5d3f6a; /* 보라색 계열 */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#submit-button:hover, #lookup-button:hover {
+    background-color: #7a5091;
+}
+
+/* 조회 섹션 스타일 */
+#lookup-section {
+    padding: 10px;
+    background-color: #f0f0f5;
+    border-radius: 8px;
+}
+
+/* 직접 입력 텍스트 필드 스타일 (직접 입력 시 라디오 버튼 옆에 나타남) */
+#story-gender-other-input {
+    width: auto !important; /* 너비를 내용에 맞게 조정 */
+    margin-left: 10px;
+    display: none; /* JS가 제어합니다. */
+}

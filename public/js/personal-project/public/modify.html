@@ -1,34 +1,36 @@
 <!DOCTYPE html>
 <html lang="ko">
+    
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>내 사연 조회 및 수정</title>
     <link href="style.css" rel="stylesheet">
 </head>
+
 <body>
      <div id="container">
         <h1>내 사연 조회 및 수정</h1>
-        <p class="guide-text">입력했던 내용이 불러와졌습니다. 수정할 내용이 있다면 변경 후 '다시 제출하기' 버튼을 눌러주세요.</p>
+        <p class="guide-text">입력했던 내용을 불러왔습니다. 수정할 내용이 있다면 변경 후 '다시 제출하기' 버튼을 눌러주세요.</p>
 
         <form id="story-modify-form">
             <input type="hidden" id="story-id" name="story_id" value=""> 
 
             <div id="p1-section">
-                <h2>사연 내용 수정</h2>
+                <h2>사연 내용 조회 및 수정</h2>
                 
                 <div class="input-group">
-                    <label for="story-name">닉네임/이름 (*)</label>
+                    <label for="story-name">*필수* 닉네임/이름 ※보낸 사연 조회, 수정을 할 때 필요하니 꼭 기억해주세요※</label>
                     <input type="text" id="story-name" name="story_name" maxlength="50" required>
                 </div>
                 
                 <div class="input-group">
-                    <label for="story-age">나이 (*)</label>
+                    <label for="story-age">필수* 나이</label>
                     <input type="number" id="story-age" name="story_age" min="1" max="150" required>
                 </div>
 
                 <div class="input-group radio-group">
-                    <label>성별 (*)</label>
+                    <label>*필수* 성별</label>
                     <input type="radio" id="gender-m" name="story_gender" value="남성" required><label for="gender-m">남성</label>
                     <input type="radio" id="gender-f" name="story_gender" value="여성"><label for="gender-f">여성</label>
                     <input type="radio" id="gender-o" name="story_gender" value="직접입력"><label for="gender-o">직접입력</label>
@@ -37,8 +39,8 @@
                         placeholder="직접 입력">
                 </div>
 
-                <h3>비밀번호 재설정 (수정 시에만 입력)</h3>
-                <p class="guide-text">수정 후 비밀번호를 변경하지 않으려면 빈칸으로 두세요. 변경하려면 새 비밀번호를 입력하세요.</p>
+                <h3>비밀번호 재설정 (*수정 시에만 입력*)</h3>
+                <p class="guide-text">※비밀번호를 변경하지 않으려면 빈칸으로 두세요. 변경하려면 새 비밀번호를 입력하세요.※</p>
                 <div class="input-group">
                     <label for="story-pw">새 비밀번호</label>
                     <input type="password" id="story-pw" name="story_pw" maxlength="16">
@@ -49,14 +51,14 @@
                 </div>
 
                 <div class="input-group">
-                    <label for="story-content">라디오 사연 내용 (*)</label>
+                    <label for="story-content">*필수* 라디오 사연 내용</label>
                     <textarea id="story-content" name="story_content" rows="10" required></textarea>
                 </div>
                 
                 <hr>
                 
                 <div class="input-group radio-group">
-                    <label>경품 응모 여부 (*)</label>
+                    <label>*필수* 경품 응모 여부 (경품 응모를 하고 난 뒤에는 취소가 불가합니다!)</label>
                     <input type="radio" id="apply-yes" name="gift_apply" value="네" required><label for="apply-yes">네</label>
                     <input type="radio" id="apply-no" name="gift_apply" value="아니요"><label for="apply-no">아니요</label>
                 </div>

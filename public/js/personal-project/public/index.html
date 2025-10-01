@@ -9,7 +9,6 @@
 </head>
 
 <body>
-
     <div id="container">
         <h1>라디오 사연 모집!</h1>
         <div class="intro-text">
@@ -22,8 +21,8 @@
             <h2>내 사연 조회 및 수정</h2>
             <p>이미 제출한 사연이 있다면 닉네임과 비밀번호로 조회하세요.</p>
             <div class="input-group">
-                <label for="lookup-name">닉네임/이름</label>
-                <input type="text" id="lookup-name" placeholder="제출 시 사용한 닉네임/이름">
+                <label for="lookup-name">이름/닉네임</label>
+                <input type="text" id="lookup-name" placeholder="제출 시 사용한 이름/닉네임">
             </div>
             <div class="input-group">
                 <label for="lookup-password">비밀번호</label>
@@ -41,7 +40,7 @@
                 <h2>사연 입력</h2>
 
                 <div class="input-group">
-                    <label for="story-name">*필수* 닉네임/이름 ※보낸 사연 조회, 수정을 할 때 필요하니 꼭 기억해주세요※ </label>
+                    <label for="story-name">*필수* 이름/닉네임 ※보낸 사연 조회, 수정을 할 때 필요하니 꼭 기억해주세요※</label>
                     <input type="text" id="story-name" name="story_name" maxlength="50" required>
                 </div>
 
@@ -56,8 +55,8 @@
                         for="gender-m">남성</label>
                     <input type="radio" id="gender-f" name="story_gender" value="여성"><label for="gender-f">여성</label>
 
-                    <input type="radio" id="gender-o" name="story_gender" value="직접입력"><label
-                        for="gender-o">직접입력</label>
+                    <input type="radio" id="gender-o" name="story_gender" value="직접 입력"><label
+                        for="gender-o">직접 입력</label>
 
                     <input type="text" id="story-gender-other-input" style="display: none;" name="story_gender_other"
                         placeholder="직접 입력">
@@ -82,10 +81,11 @@
                 <hr>
 
                 <div class="input-group radio-group">
-                    <label>*필수* 경품 응모 여부</label>
-                    <input type="radio" id="apply-yes" name="gift_apply" value="네" required><label
+                    <label>*필수* 경품 응모 여부 (경품 응모를 하고 난 뒤에는 취소가 불가합니다!)</label>
+                    <!-- name 값이 같으면 required 도 같이 적용 -->
+                    <input type="radio" id="apply-yes" name="gift_apply" value="네" required><label 
                         for="apply-yes">네</label>
-                    <input type="radio" id="apply-no" name="gift_apply" value="아니요"><label for="apply-no">아니요</label>
+                    <input type="radio" id="apply-no" name="gift_apply" value="아니요" checked><label for="apply-no">아니요</label>
                 </div>
             </div>
             <div id="p2-section" style="display: none;">
@@ -115,8 +115,8 @@
 
                 <div class="input-group radio-group">
                     <label>*필수* 개인정보 제공 동의</label>
-                    <input type="radio" id="agree-yes" name="privacy_agree" value="Y"><label for="agree-yes">동의함</label>
-                    <input type="radio" id="agree-no" name="privacy_agree" value="N"><label for="agree-no">동의하지
+                    <input type="radio" id="agree-yes" name="privacy_agree" value="yes"><label for="agree-yes">동의함</label>
+                    <input type="radio" id="agree-no" name="privacy_agree" value="no"><label for="agree-no">동의하지
                         않음</label>
                 </div>
             </div>
@@ -126,7 +126,7 @@
 
         </form>
     </div>
-    <script src="../public/script.js"></script>
+    <script src="script.js"></script>
 
 </body>
 
