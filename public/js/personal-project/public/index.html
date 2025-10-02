@@ -1,133 +1,163 @@
 <!DOCTYPE html>
 <html lang="ko">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>라디오 사연 모집</title>
-    <link href="style.css" rel="stylesheet">
+    <title>라디오 사연 모집!</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-    <div id="container">
-        <h1>라디오 사연 모집!</h1>
-        <div class="intro-text">
-            <p>일상생활 속 이런 이야기, 저런 이야기, 고민거리 다 모집중입니다!</p>
-            <p>사연을 보내 주신 분들 중 랜덤으로 선물도 드리고 있으니</p>
-            <p>관심 있으신 분은 응모해주세요~</p>
-        </div>
+    <div class="container">
+        <header>
+            <h1>라디오 사연 모집!</h1>
+            <p class="subtitle">당신의 특별한 이야기를 들려주세요.</p>
+        </header>
 
-        <div id="lookup-section">
+        <section class="section story-lookup-area">
             <h2>내 사연 조회 및 수정</h2>
-            <p>이미 제출한 사연이 있다면 닉네임과 비밀번호로 조회하세요.</p>
-            <div class="input-group">
-                <label for="lookup-name">이름/닉네임</label>
-                <input type="text" id="lookup-name" placeholder="제출 시 사용한 이름/닉네임">
+            <p class="section-desc">**이름/닉네임**과 **사연 비밀번호**로 사연을 조회하고 수정할 수 있습니다.</p>
+            
+            <form action="/story_modify.html" method="get">
+                <div class="form-group">
+                    <label for="lookup-name-submit">이름/닉네임</label>
+                    <input type="text" id="lookup-name-submit" name="lookup_name" placeholder="사연 작성 시 사용한 이름/닉네임">
+                </div>
+                <div class="form-group">
+                    <label for="lookup-pw-submit">사연 비밀번호</label>
+                    <input type="password" id="lookup-pw-submit" name="lookup_pw"  placeholder="사연 작성 시 설정한 비밀번호">
+                </div>
+                
+                <div class="submit-area" style="text-align: left; margin-top: 10px;">
+                    <button type="submit" class="common-action-button">
+                        내 사연 조회하기
+                    </button>
+                </div>
+            </form>
+        </section>
+        
+        <hr class="section-divider">
+
+
+        <form action="/submit-story" method="post" class="story-form" id="story_submit_form">
+
+            <section class="section essential-info">
+                <h2>사연 응모자 정보</h2>
+                <div class="form-group">
+                    <label for="story_name">이름/닉네임 *</label>
+                    <input type="text" id="story_name" name="story_name" placeholder="본명 또는 활동 닉네임">
+                </div>
+                
+                <div class="form-group" style="display: flex; gap: 20px;">
+                    <div style="flex: 1;">
+                        <label for="story_age">나이 *</label>
+                        <input type="number" id="story_age" name="story_age" min="1" max="150" placeholder="만 나이">
+                    </div>
+                    <div style="flex: 1;">
+                        <label>성별 *</label>
+                        <div class="radio-group">
+                            <input type="radio" id="gender_m" name="story_gender" value="M">
+                            <label for="gender_m">남성</label>
+                            <input type="radio" id="gender_f" name="story_gender" value="F">
+                            <label for="gender_f">여성</label>
+                            <input type="radio" id="gender_etc" name="story_gender" value="E">
+                            <label for="gender_etc">기타</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group" id="gender_other_input" style="display:none; margin-top: 15px;">
+                    <label for="story_gender_other">직접 입력 *</label>
+                    <input type="text" id="story_gender_other" name="story_gender_other" placeholder="성별을 직접 입력해주세요">
+                </div>
+                
+                <div class="form-group">
+                    <label for="story_pw_submit">사연 비밀번호 *</label>
+                    <input 
+                        type="password" 
+                        id="story_pw_submit" 
+                        name="story_pw" 
+                        minlength="4" 
+                        placeholder="4자리 이상, 대소문자, 특수문자(!@#$%^&*)를 각각 1개 이상 포함">
+                    
+                    <p class="password-hint" style="font-size: 0.85em; color: #ff6347; margin-top: 5px;">
+                        * 대문자, 소문자, 특수문자(!@#$%^&*)를 각각 1개 이상 포함해야 합니다.
+                    </p>
+                </div>
+                
+                <div class="form-group">
+                    <label for="story_pw_confirm">사연 비밀번호 재확인 *</label>
+                    <input 
+                        type="password" 
+                        id="story_pw_confirm" 
+                       
+                        minlength="4" 
+                        placeholder="위 비밀번호를 다시 한 번 입력해 주세요">
+                    <p id="pw_mismatch_alert" style="font-size: 0.85em; color: red; margin-top: 5px; display: none;">
+                        비밀번호가 일치하지 않습니다.
+                    </p>
+                </div>
+            </section>
+
+            <section class="section story-details">
+                <h2>사연 내용</h2>
+                <div class="form-group">
+                    <label for="story_content">나의 이야기 *</label>
+                    <textarea id="story_content" name="story_content" rows="10"  placeholder="여기에 사연을 작성해주세요."></textarea>
+                </div>
+            </section>
+
+            <section class="section prize-apply-check">
+                <div class="form-group checkbox-group">
+                    <input type="checkbox" id="gift_apply" name="gift_apply" value="Y">
+                    <label for="gift_apply">
+                        경품 추첨에 참여하고, 경품 수령 정보를 입력하겠습니다.<hr>
+                        추첨에 참여 하지 않으시는 분은 '사연 제출하기 버튼을 눌러주세요'
+                    </label>
+                </div>
+            </section>
+
+            <section class="section prize-info" id="prize-info-section" style="display:none;">
+                <h2>경품 수령 정보</h2>
+                <p class="section-desc">경품 발송을 위해 필수적으로 필요한 정보입니다.</p>
+                
+                <div class="form-group">
+                    <label for="applicant_name">수령인 이름 *</label>
+                    <input type="text" id="applicant_name" name="applicant_name" placeholder="경품을 받을 분의 성명">
+                </div>
+                <div class="form-group">
+                    <label for="applicant_email">이메일 *</label>
+                    <input type="email" id="applicant_email" name="applicant_email" placeholder="경품 및 사연 확인용 이메일">
+                </div>
+                <div class="form-group">
+                    <label for="applicant_phone">연락처 *</label>
+                    <input type="tel" id="applicant_phone" name="applicant_phone" placeholder="010-XXXX-XXXX">
+                </div>
+                
+                <div class="form-group">
+                    <label for="applicant_postal">우편번호 *</label>
+                    <div class="address-group">
+                        <input type="text" id="applicant_postal" name="applicant_postal" placeholder="00000" maxlength="5">
+                        <button type="button" class="search-button common-action-button">주소 검색</button>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="address_detail">상세 주소 *</label>
+                    <input type="text" id="address_detail" name="address_detail" placeholder="아파트 동/호수, 건물 이름 등">
+                </div>
+                
+                <div class="form-group checkbox-group">
+                    <input type="checkbox" id="privacy_agree" name="privacy_agree" value="Y">
+                    <label for="privacy_agree">경품 발송을 위한 개인정보 수집 및 이용에 동의합니다. * </label>
+                </div>
+            </section>
+
+            <div class="submit-area">
+                <button type="submit" class="submit-button">사연 제출하기</button>
             </div>
-            <div class="input-group">
-                <label for="lookup-password">비밀번호</label>
-                <input type="password" id="lookup-password" placeholder="설정한 비밀번호">
-            </div>
-            <button id="lookup-button" type="button">내 사연 조회하기</button>
-        </div>
-
-        <hr>
-
-        <form id="story-form">
-            <input type="hidden" id="story-id" name="story_id" value="">
-
-            <div id="p1-section">
-                <h2>사연 입력</h2>
-
-                <div class="input-group">
-                    <label for="story-name">*필수* 이름/닉네임 ※보낸 사연 조회, 수정을 할 때 필요하니 꼭 기억해주세요※</label>
-                    <input type="text" id="story-name" name="story_name" maxlength="50" required>
-                </div>
-
-                <div class="input-group">
-                    <label for="story-age">*필수* 나이</label>
-                    <input type="number" id="story-age" name="story_age" min="1" max="150" required>
-                </div>
-
-                <div class="input-group radio-group">
-                    <label>*필수* 성별</label>
-                    <input type="radio" id="gender-m" name="story_gender" value="남성" required><label
-                        for="gender-m">남성</label>
-                    <input type="radio" id="gender-f" name="story_gender" value="여성"><label for="gender-f">여성</label>
-
-                    <input type="radio" id="gender-o" name="story_gender" value="직접 입력"><label
-                        for="gender-o">직접 입력</label>
-
-                    <input type="text" id="story-gender-other-input" style="display: none;" name="story_gender_other"
-                        placeholder="직접 입력">
-                </div>
-
-                <h3>비밀번호 설정 (조회/수정용)</h3>
-                <p class="guide-text">최소 8자, 최대 16자, 영문 대/소문자, 숫자, 특수문자를 각각 1개 이상 포함해야 합니다.</p>
-                <div class="input-group">
-                    <label for="story-pw">*필수* 비밀번호</label>
-                    <input type="password" id="story-pw" name="story_pw" maxlength="16" required>
-                </div>
-                <div class="input-group">
-                    <label for="story-pw-confirm">*필수* 비밀번호 확인</label>
-                    <input type="password" id="story-pw-confirm" required>
-                </div>
-
-                <div class="input-group">
-                    <label for="story-content">*필수* 라디오 사연 내용</label>
-                    <textarea id="story-content" name="story_content" rows="10" required></textarea>
-                </div>
-
-                <hr>
-
-                <div class="input-group radio-group">
-                    <label>*필수* 경품 응모 여부 (경품 응모를 하고 난 뒤에는 취소가 불가합니다!)</label>
-                    <!-- name 값이 같으면 required 도 같이 적용 -->
-                    <input type="radio" id="apply-yes" name="gift_apply" value="네" required><label 
-                        for="apply-yes">네</label>
-                    <input type="radio" id="apply-no" name="gift_apply" value="아니요" checked><label for="apply-no">아니요</label>
-                </div>
-            </div>
-            <div id="p2-section" style="display: none;">
-                <h2>경품 응모 정보</h2>
-
-                <div class="input-group">
-                    <label for="applicant-name">*필수* 실명(주민등록상 이름)</label>
-                    <input type="text" id="applicant-name" name="applicant_name">
-                </div>
-
-                <div class="input-group">
-                    <label for="applicant-phone">*필수* 연락처</label>
-                    <input type="tel" id="applicant-phone" name="applicant_phone" placeholder="010-0000-0000">
-                </div>
-
-                <div class="input-group">
-                    <label for="applicant-email">*필수* 이메일</label>
-                    <input type="email" id="applicant-email" name="applicant_email">
-                </div>
-
-                <div class="input-group address-group">
-                    <label for="applicant-postal">*필수* 주소</label>
-                    <input type="text" id="applicant-postal" name="applicant_postal" placeholder="우편번호">
-                    <button type="button" id="postal-search-button">우편번호 찾기</button>
-                    <input type="text" id="address-detail" name="address_detail" placeholder="상세 주소">
-                </div>
-
-                <div class="input-group radio-group">
-                    <label>*필수* 개인정보 제공 동의</label>
-                    <input type="radio" id="agree-yes" name="privacy_agree" value="yes"><label for="agree-yes">동의함</label>
-                    <input type="radio" id="agree-no" name="privacy_agree" value="no"><label for="agree-no">동의하지
-                        않음</label>
-                </div>
-            </div>
-            <div id="submit-area">
-                <button id="submit-button" type="submit">사연 전송하기</button>
-            </div>
-
         </form>
     </div>
-    <script src="script.js"></script>
+    
 
 </body>
-
 </html>

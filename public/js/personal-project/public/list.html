@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>관리자 - 사연 응모 목록</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        h1 { color: #333; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; font-size: 14px; }
+        th { background-color: #f2f2f2; }
+        tr:hover { background-color: #f9f9f9; }
+        button { padding: 5px 10px; cursor: pointer; background-color: #4CAF50; color: white; border: none; border-radius: 3px; }
+        .loading { font-size: 1.2em; color: #6c757d; }
+    </style>
+</head>
+<body>
+    <h1>📻 사연 응모 관리자 목록 (<span id="story-count">로딩 중...</span>)</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>이름</th>
+                <th>나이</th>
+                <th>성별</th>
+                <th>사연 내용 (앞 100자)</th>
+                <th>경품 응모</th>
+                <th>경품 신청자 이름</th>
+                <th>경품 신청자 이메일</th>
+                <th>상세</th>
+            </tr>
+        </thead>
+        <tbody id="story-list-body">
+            <tr><td colspan="9" class="loading">데이터를 불러오는 중...</td></tr>
+        </tbody>
+    </table>
+    
+    <script src="list.js"></script>
+</body>
+</html>

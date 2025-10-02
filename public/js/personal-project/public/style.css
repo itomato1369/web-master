@@ -1,176 +1,251 @@
-/* 기본 설정: 모든 요소의 여백 및 상자 모델 초기화 */
-* {
-    box-sizing: border-box;
+/* style.css (Lighter Mint Green Theme) */
+
+/* 1. 기본 설정 및 색상 변수 */
+:root {
+    --color-primary: #5FBC9C; /* 메인 테마 색상 (살짝 옅은 민트/녹색) */
+    --color-secondary: #34A87C; /* 버튼, 강조 등 (조금 더 진한 녹색) */
+    --color-background: #F8F8F8; /* 페이지 배경색 (아주 연한 회색) */
+    --color-light-bg: #FFFFFF; /* 폼 컨테이너 배경색 */
+    --color-text: #444444;
+    --color-sub-text: #888888;
+    --color-border: #D3D3D3;
+    --color-focus: #4A90E2; /* 포커스/액티브 상태 (파란색 계열로 유지) */
+    --color-warning: #ffaa00; /* 경고/안내 색상 (노란색 계열) */
+    --color-delete: #ff4500; /* 삭제 버튼 색상 */
+}
+
+/* 2. 전체 레이아웃 */
+body {
+    font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
+    background-color: var(--color-background);
+    color: var(--color-text);
+    line-height: 1.6;
     margin: 0;
     padding: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
-/* 참조 사이트의 깔끔함을 반영한 배경 및 중앙 정렬 */
-body {
-    background-color: #f7f7f7; /* 매우 밝은 회색 배경 */
-    color: #333;
-    line-height: 1.6;
-}
-
-#container {
-    max-width: 700px; /* 폼의 최대 너비를 지정하여 중앙에 깔끔하게 배치 */
-    margin: 40px auto; /* 상하 여백 40px, 좌우 자동 (중앙 정렬) */
+.container {
+    max-width: 800px;
+    margin: 40px auto;
     padding: 30px;
-    background-color: #fff; /* 컨테이너 내부를 흰색으로 */
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* 은은한 그림자 */
+    background-color: var(--color-light-bg);
+    border-radius: 12px; /* 둥근 모서리 */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); /* 부드러운 그림자 */
 }
 
-/* 제목 스타일 */
-h1 {
-    font-size: 28px;
-    color: #5d3f6a; /* 사용자 화면 설계의 보라색 계열 */
+/* 3. 헤더 및 타이틀 */
+header {
     text-align: center;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--color-border);
+    margin-bottom: 30px;
+}
+
+header h1 {
+    color: var(--color-secondary);
+    font-size: 2.5em;
+    font-weight: 700;
+    margin: 0;
+}
+
+.subtitle {
+    color: var(--color-sub-text);
+    font-size: 1.1em;
+    margin-top: 5px;
+}
+
+/* 4. 섹션 스타일 */
+.section {
+    padding: 20px 0;
+    margin-bottom: 25px;
+}
+
+.section h2 {
+    font-size: 1.6em;
+    color: var(--color-secondary);
+    border-left: 5px solid var(--color-primary); /* 좌측 라인 강조 */
+    padding-left: 15px;
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.section-desc {
+    color: var(--color-sub-text);
+    font-size: 0.95em;
     margin-bottom: 20px;
 }
 
-h2 {
-    font-size: 22px;
-    color: #5d3f6a;
-    border-bottom: 2px solid #5d3f6a;
-    padding-bottom: 5px;
-    margin-top: 30px;
+.section-divider {
+    border: none;
+    border-top: 1px solid var(--color-border);
+    margin: 50px 0;
+}
+
+/* 5. 폼 요소 스타일 */
+.form-group {
     margin-bottom: 20px;
 }
 
-h3 {
-    font-size: 18px;
-    color: #333;
-    margin-top: 25px;
-    margin-bottom: 10px;
-}
-
-/* 안내 문구 및 intro-text 스타일 */
-.intro-text, .guide-text {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #666;
-    font-size: 14px;
-}
-
-.guide-text {
-    text-align: left;
-    font-style: italic;
-    margin-top: -10px; /* 제목과의 간격 조정 */
-}
-
-/* 입력 그룹 스타일 */
-.input-group {
-    margin-bottom: 20px;
-    display: flex;
-    flex-direction: column;
-}
-
-.input-group label {
-    font-weight: bold;
+.form-group label {
+    display: block;
+    font-weight: 600;
     margin-bottom: 8px;
-    font-size: 15px;
+    color: var(--color-text);
 }
 
-/* input 및 textarea 스타일 통일 */
-.input-group input[type="text"],
-.input-group input[type="password"],
-.input-group input[type="number"],
-.input-group input[type="email"],
-.input-group input[type="tel"],
-.input-group textarea {
+input[type="text"],
+input[type="number"],
+input[type="password"],
+input[type="email"],
+input[type="tel"],
+textarea {
     width: 100%;
     padding: 12px;
-    border: 1px solid #ddd;
+    border: 1px solid var(--color-border);
     border-radius: 6px;
-    font-size: 16px; /* 모든 입력칸 글꼴 크기 통일 */
-    transition: border-color 0.3s;
+    box-sizing: border-box;
+    font-size: 1em;
+    transition: border-color 0.3s, box-shadow 0.3s;
 }
 
-/* 포커스 시 테두리 색상 변경 */
-.input-group input:focus,
-.input-group textarea:focus {
-    border-color: #7a5091; /* 포커스 시 보라색 계열로 변경 */
+input:focus,
+textarea:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(95, 188, 156, 0.2); 
     outline: none;
 }
 
-/* 라디오 버튼 그룹 정렬 */
-.radio-group label {
-    font-weight: normal;
-    margin-right: 15px;
-    display: inline-flex;
-    align-items: center;
-    cursor: pointer;
+textarea {
+    resize: vertical;
+    min-height: 150px;
 }
 
-.radio-group input[type="radio"] {
-    margin-right: 5px;
+/* 6. 라디오 및 체크박스 그룹 */
+.radio-group {
+    display: flex;
+    gap: 20px;
 }
 
-/* 주소 그룹 버튼 정렬 */
-.address-group {
-    flex-direction: column;
+/* 라디오/체크박스 디자인은 생략 */
+
+/* 7. 경품 신청/수정 섹션 강조 */
+.prize-apply-check {
+    border-left: 5px solid var(--color-focus);
 }
 
-.address-group input {
-    margin-top: 5px;
+.prize-apply-check .checkbox-group label {
+    font-weight: bold;
+    color: var(--color-secondary);
 }
 
-#postal-search-button {
-    background-color: #888;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 14px;
-    width: 150px;
-    margin-top: 5px;
-    transition: background-color 0.3s;
-}
-
-#postal-search-button:hover {
-    background-color: #666;
-}
-
-/* 구분선 스타일 */
-hr {
-    border: 0;
-    height: 1px;
-    background-color: #eee;
-    margin: 30px 0;
-}
-
-/* 전송/조회 버튼 스타일 (참조 사이트처럼 눈에 띄게) */
-#submit-button, #lookup-button {
-    width: 100%;
-    padding: 15px;
+/* 8. 경품 정보 섹션 */
+.prize-info {
+    border: 1px dashed var(--color-primary);
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #f7fffd;
     margin-top: 20px;
-    background-color: #5d3f6a; /* 보라색 계열 */
+}
+
+.prize-info h2 {
+    border-left: none;
+    text-align: center;
+    padding: 0;
+    color: var(--color-secondary);
+}
+
+/* 주소 검색 입력 그룹 */
+.address-group {
+    display: flex;
+    align-items: center;
+}
+
+.address-group input[name="applicant_postal"] {
+    width: 100px;
+    flex-shrink: 0;
+}
+
+
+/* 9. 버튼 스타일 */
+.submit-area {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.submit-button {
+    background-color: var(--color-secondary);
     color: white;
+    padding: 15px 30px;
     border: none;
     border-radius: 8px;
-    font-size: 18px;
+    font-size: 1.1em;
     font-weight: bold;
     cursor: pointer;
+    transition: background-color 0.3s, transform 0.1s;
+    letter-spacing: 1px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+    display: inline-block;
+}
+
+.submit-button:hover {
+    background-color: var(--color-primary);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* 삭제 버튼 (수정 페이지 전용) */
+.delete-button {
+    background-color: var(--color-delete);
+}
+.delete-button:hover {
+    background-color: #d63030;
+}
+
+/* 10. 공통 액션 버튼 (주소 검색, 조회하기 버튼 등) */
+.common-action-button {
+    background-color: var(--color-primary);
+    color: white;
+    padding: 12px 15px;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.95em;
+    cursor: pointer;
     transition: background-color 0.3s;
+    line-height: 1.5;
+    font-weight: bold;
+    height: 43px;
+    box-shadow: none;
+    flex-shrink: 0;
 }
 
-#submit-button:hover, #lookup-button:hover {
-    background-color: #7a5091;
+.common-action-button:hover {
+    background-color: var(--color-secondary);
 }
 
-/* 조회 섹션 스타일 */
-#lookup-section {
-    padding: 10px;
-    background-color: #f0f0f5;
-    border-radius: 8px;
-}
-
-/* 직접 입력 텍스트 필드 스타일 (직접 입력 시 라디오 버튼 옆에 나타남) */
-#story-gender-other-input {
-    width: auto !important; /* 너비를 내용에 맞게 조정 */
+.search-button {
     margin-left: 10px;
-    display: none; /* JS가 제어합니다. */
+}
+
+/* 11. 수정 페이지 전용 알림 스타일 */
+.info-alert {
+    border-left: 5px solid var(--color-warning);
+    background-color: #fff8e1;
+    margin-bottom: 30px;
+    border-radius: 8px;
+    padding: 15px;
+}
+
+.info-alert p {
+    color: #6d4c41;
+    font-weight: bold;
+    margin: 0;
+}
+.submit-area-note {
+    margin-top: 5px; 
+    text-align: center;
+}
+.submit-area-note p {
+    font-size: 0.9em; 
+    color: var(--color-sub-text);
 }
