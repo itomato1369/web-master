@@ -6,6 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>내 사연 조회 및 수정</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* 라디오 버튼 그룹 레이아웃을 위한 기본 스타일 추가 */
+        .radio-group label {
+            margin-right: 15px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 
 <body>
@@ -29,256 +36,264 @@
             <section class="section essential-info">
                 <h2>사연 응모자 정보 (수정)</h2>
                 <div class="form-group">
-                    <label for="story_name">이름/닉네임 *</label>
-                    <input type="text" id="story_name" name="story_name" value="[사용자가 입력한 이름/닉네임]">
+                    <label for="story_name">이름/닉네임</label>
+                    <input type="text" id="story_name" name="story_name" required readonly>
+                </div>
+                
+                <div class="form-group">
+                    <label for="story_age">나이</label>
+                    <input type="text" id="story_age" name="story_age" required placeholder="나이를 입력하세요.">
+                </div>
+                
+                <div class="form-group">
+                    <label>성별</label>
+                    <div class="radio-group">
+                        <input type="radio" id="gender_male" name="story_gender" value="남성" required>
+                        <label for="gender_male">남성</label>
+                        
+                        <input type="radio" id="gender_female" name="story_gender" value="여성">
+                        <label for="gender_female">여성</label>
+                        
+                        <input type="radio" id="gender_other_radio" name="story_gender" value="기타">
+                        <label for="gender_other_radio">직접입력</label>
+                    </div>
+                    <input type="text" id="story_gender_other" name="story_gender_other" style="display:none; margin-top: 10px;" placeholder="직접 입력">
+                </div>
+            </section>
+            
+            <section class="section story-content-area">
+                <h2>사연 내용 (수정)</h2>
+                <div class="form-group">
+                    <label for="story_content">*사연을 수정해 주세요*</label>
+                    <textarea id="story_content" name="story_content" rows="10" required placeholder="당신의 이야기를 들려주세요."></textarea>
                 </div>
 
-                <div class="form-group" style="display: flex; gap: 20px;">
-                    <div style="flex: 1;">
-                        <label for="story_age">나이 *</label>
-                        <input type="number" id="story_age" name="story_age" min="1" max="150" value="[사용자가 입력한 나이]">
+                <div class="form-group">
+                    <label for="story_pw">새 사연 비밀번호</label>
+                    <input type="password" id="story_pw" name="story_pw" placeholder="변경할 경우에만 입력 (4자리 이상, 대/소문자, 특수문자 포함)">
+                    <p class="guide-text">※ 비밀번호를 변경하지 않으려면 이 필드를 비워두세요. (기존 비밀번호 유지)</p>
+                </div>
+            </section>
+
+            <section class="section prize-info-area">
+                <h2>경품 응모 정보 (수정)</h2>
+                <div class="form-group checkbox-group">
+                    <input type="checkbox" id="gift_apply" name="gift_apply" value="Y">
+                    <label for="gift_apply">경품 응모에 참여합니다</label>
+                </div>
+                
+                <div id="prize_info_fields" style="display: none;">
+                    <div class="form-group">
+                        <label for="applicant_name">경품 수령인 이름(주민등록상 이름)</label>
+                        <input type="text" id="applicant_name" name="applicant_name" placeholder="본명">
                     </div>
-                    <div style="flex: 1;">
-                        <label>성별 *</label>
-                        <div class="radio-group">
-                            <input type="radio" id="gender_m" name="story_gender" value="M" [M_선택_시_checked]>
-                            <label for="gender_m">남성</label>
-                            <input type="radio" id="gender_f" name="story_gender" value="F" [F_선택_시_checked]>
-                            <label for="gender_f">여성</label>
-                            <input type="radio" id="gender_etc" name="story_gender" value="E" [E_선택_시_checked]>
-                            <label for="gender_etc">기타</label>
+                    <div class="form-group">
+                        <label for="applicant_email">이메일</label>
+                        <input type="email" id="applicant_email" name="applicant_email" placeholder="사연 확인용 이메일">
+                    </div>
+                    <div class="form-group">
+                        <label for="applicant_phone">연락처</label>
+                        <input type="tel" id="applicant_phone" name="applicant_phone" placeholder="010-XXXX-XXXX">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="applicant_postal">경품 수령할 주소/우편번호</label>
+                        <div class="address-group">
+                            <input type="text" id="applicant_postal" name="applicant_postal" placeholder="00000" maxlength="5">
+                            <button type="button" class="search-button common-action-button">주소 검색</button>
                         </div>
                     </div>
-                </div>
-
-                <div class="form-group" id="gender_other_input"
-                    style="display: [E_선택_시_block_아닐_시_none]; margin-top: 15px;">
-                    <label for="story_gender_other">직접 입력 *</label>
-                    <input type="text" id="story_gender_other" name="story_gender_other" placeholder="성별을 직접 입력해주세요"
-                        value="[기존 story_gender_other 값]">
-                </div>
-                <div class="form-group">
-                    <label for="story_pw">사연 비밀번호 *</label>
-                    <input type="password" id="story_pw" name="story_pw" minlength="4"
-                        placeholder="4자리 이상, 영어 대소문자, 특수문자(!@#$%^&*)를 각각 1개 이상 포함">
-
-                </div>
-
-            </section>
-
-            <section class="section story-details">
-                <h2>사연 내용</h2>
-                <div class="form-group">
-                    <label for="story_content">나의 이야기 *</label>
-                    <textarea id="story_content" name="story_content" rows="10">[사용자가 입력한 사연 내용]</textarea>
-                </div>
-            </section>
-
-            <section class="section prize-apply-check">
-                <div class="form-group checkbox-group">
-                    <input type="checkbox" id="gift_apply" name="gift_apply" value="Y" [gift_apply_Y_시_checked]>
-                    <label for="gift_apply">
-                        경품 추첨에 참여하고, 경품 수령 정보를 입력하겠습니다.
-                    </label>
-                </div>
-            </section>
-
-            <section class="section prize-info" id="prize-info-section"
-                style="display: [gift_apply_Y_시_block_N_시_none];">
-                <h2>경품 수령 정보</h2>
-
-                <div class="form-group">
-                    <label for="applicant_name">수령인 이름 *</label>
-                    <input type="text" id="applicant_name" name="applicant_name" value="[기존 applicant_name]">
-                </div>
-                <div class="form-group">
-                    <label for="applicant_email">이메일 *</label>
-                    <input type="email" id="applicant_email" name="applicant_email" value="[기존 applicant_email]">
-                </div>
-                <div class="form-group">
-                    <label for="applicant_phone">연락처 *</label>
-                    <input type="tel" id="applicant_phone" name="applicant_phone" value="[기존 applicant_phone]">
-                </div>
-
-                <div class="form-group">
-                    <label for="applicant_postal">우편번호 *</label>
-                    <div class="address-group">
-                        <input type="text" id="applicant_postal" name="applicant_postal" value="[기존 applicant_postal]"
-                            maxlength="5">
-                        <button type="button" class="search-button common-action-button">주소 검색</button>
+                    
+                    <div class="form-group">
+                        <label for="address_detail">상세 주소</label>
+                        <input type="text" id="address_detail" name="address_detail" placeholder="아파트 동/호수, 건물 이름 등">
                     </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="address_detail">상세 주소 *</label>
-                    <input type="text" id="address_detail" name="address_detail" value="[기존 address_detail]">
-                </div>
-
-                <div class="form-group checkbox-group">
-                    <input type="checkbox" id="privacy_agree" name="privacy_agree" value="Y"
-                        [privacy_agree_Y_시_checked]>
-                    <label for="privacy_agree">경품 발송을 위한 개인정보 수집 및 이용에 동의합니다. *</label>
+                    
+                    <div class="form-group checkbox-group">
+                        <input type="checkbox" id="privacy_agree" name="privacy_agree" value="Y">
+                        <label for="privacy_agree">경품 발송을 위한 개인정보 수집 및 이용에 동의합니다</label>
+                    </div>
                 </div>
             </section>
 
             <div class="submit-area">
                 <button type="submit" class="submit-button">사연 수정하기</button>
             </div>
-
-            <div class="submit-area-note">
-                <p>
-                    (수정할 내용이 없다면 **수정하기 버튼을 누르지 않으셔도 됩니다.**)
-                </p>
-            </div>
-
         </form>
     </div>
-    <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        // 1. URL에서 이름과 비밀번호를 추출합니다.
-        const params = new URLSearchParams(window.location.search);
-        const lookupName = params.get('lookup_name');
-        const lookupPw = params.get('lookup_pw');
+</body>
 
-        if (!lookupName || !lookupPw) {
-            alert('조회 정보가 누락되었습니다. 메인 페이지로 돌아갑니다.');
-            window.location.href = '/';
-            return;
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const giftApplyCheckbox = document.getElementById('gift_apply');
+    const prizeInfoSection = document.getElementById('prize_info_fields');
+    
+    // 💡 복구된 성별-기타 관련 DOM 요소 (Radio 기반)
+    const genderRadios = document.querySelectorAll('input[name="story_gender"]');
+    const genderOtherInput = document.getElementById('story_gender_other');
+    const radioMale = document.getElementById('gender_male');
+    const radioFemale = document.getElementById('gender_female');
+    const radioOther = document.getElementById('gender_other_radio');
+
+
+    // 1. 성별-기타 입력 필드 토글 로직 (Radio 기반)
+    function toggleGenderOtherInput() {
+        const selectedGender = document.querySelector('input[name="story_gender"]:checked')?.value;
+        if (selectedGender === '기타') {
+            genderOtherInput.style.display = 'block';
+            genderOtherInput.setAttribute('required', 'required');
+        } else {
+            genderOtherInput.style.display = 'none';
+            genderOtherInput.removeAttribute('required');
         }
+    }
 
-        // 폼 요소 변수 초기화
-        const genderEtcRadio = document.getElementById('gender_etc');
-        const genderEtcInput = document.getElementById('gender_other_input');
-        const genderEtcField = document.getElementById('story_gender_other');
-        const genderRadios = document.querySelectorAll('input[name="story_gender"]');
-        const giftApplyCheckbox = document.getElementById('gift_apply');
-        const prizeInfoSection = document.getElementById('prize-info-section');
-
-
-        // 2. 서버에 데이터 조회를 요청합니다.
-        fetch(`/get-story?lookup_name=${encodeURIComponent(lookupName)}&lookup_pw=${encodeURIComponent(lookupPw)}`)
-            .then(response => {
-                // HTTP 상태 코드 처리
-                if (response.status === 404) {
-                    alert('일치하는 사연을 찾을 수 없습니다. 이름과 비밀번호를 확인해 주세요.');
-                    window.location.href = '/';
-                    return null;
-                }
-                if (!response.ok) {
-                    // 500 에러 발생 시, catch 블록으로 이동
-                    throw new Error('서버에서 데이터를 불러오는 데 실패했습니다. (응답 상태:' + response.status + ')');
-                }
-                return response.json();
-            })
-            .then(data => {
-                if (!data) return;
-
-                // 3. 조회된 데이터를 폼 필드에 채웁니다. (모두 대문자 컬럼명 사용)
-
-                // 필수 정보 섹션
-                document.getElementById('story_id_hidden').value = data.STORY_ID; 
-                document.getElementById('story_name').value = data.STORY_NAME || '';
-                document.getElementById('story_age').value = data.STORY_AGE || '';
-
-                // 🟢 성별 선택 로직 (STORY_GENDER 필드 로직)
-                const gender = data.STORY_GENDER; 
-
-                if (gender === 'M' || gender === 'F') {
-                    // 'M' 또는 'F'라면 해당 라디오 버튼 선택
-                    document.getElementById(`gender_${gender.toLowerCase()}`).checked = true;
-                } else if (gender) {
-                    // 'M' 또는 'F'가 아닌 모든 값 (예: 'E' 또는 직접 입력 문자열)은 '기타'로 처리
-                    document.getElementById('gender_etc').checked = true;
-                    
-                    // STORY_GENDER에 상세 값이 들어있으면 기타 입력 필드에 채움
-                    if (gender !== 'E') {
-                        genderEtcField.value = gender;
-                    } else {
-                        genderEtcField.value = ''; // 'E'만 있는 경우 비워둠
-                    }
-                }
-                
-                // 사연 내용
-                document.getElementById('story_content').value = data.STORY_CONTENT || '';
-
-
-                // 경품 신청 섹션
-                const isGiftApplied = data.GIFT_APPLY === 'Y';
-                giftApplyCheckbox.checked = isGiftApplied;
-
-                if (isGiftApplied) { 
-                    // 경품 정보 채우기
-                    document.getElementById('applicant_name').value = data.APPLICANT_NAME || '';
-                    document.getElementById('applicant_email').value = data.APPLICANT_EMAIL || '';
-                    document.getElementById('applicant_phone').value = data.APPLICANT_PHONE || '';
-                    document.getElementById('applicant_postal').value = data.APPLICANT_POSTAL || '';
-                    document.getElementById('address_detail').value = data.ADDRESS_DETAIL || '';
-                    document.getElementById('privacy_agree').checked = data.PRIVACY_AGREE === 'Y';
-                }
-
-
-                // 4. 로드된 데이터에 기반하여 UI 상태를 초기화하고 리스너 설정
-                
-                // 기타 성별 입력 필드 토글 함수
-                function toggleGenderOtherInput() {
-                    if (genderEtcRadio.checked) {
-                        genderEtcInput.style.display = 'block';
-                        genderEtcField.setAttribute('required', 'required'); 
-                    } else {
-                        genderEtcInput.style.display = 'none';
-                        genderEtcField.removeAttribute('required');
-                    }
-                }
-                // 초기 상태 반영 및 이벤트 리스너 설정
-                toggleGenderOtherInput(); 
-                genderRadios.forEach(radio => {
-                    radio.addEventListener('change', toggleGenderOtherInput);
-                });
-
-
-                // 경품 섹션 토글 함수
-                function togglePrizeInfoSection() {
-                    prizeInfoSection.style.display = giftApplyCheckbox.checked ? 'block' : 'none';
-                    // 경품 섹션이 숨겨질 때 필드 필수값 해제 (필요하다면)
-                    const requiredFields = prizeInfoSection.querySelectorAll('[required]');
-                    requiredFields.forEach(field => {
-                        if (giftApplyCheckbox.checked) {
-                             field.setAttribute('required', 'required');
-                        } else {
-                            field.removeAttribute('required');
-                        }
-                    });
-                }
-                // 초기 상태 반영 및 이벤트 리스너 설정
-                togglePrizeInfoSection(); 
-                giftApplyCheckbox.addEventListener('change', togglePrizeInfoSection);
-                
-            })
-            .catch(error => {
-                // 서버에서 500 에러를 보냈을 때 이 메시지를 표시
-                console.error("데이터 로드 중 에러 발생:", error);
-                alert('데이터 로드에 실패했습니다. (서버 로그 확인)');
-                window.location.href = '/'; // 실패 시 메인으로 돌려보냄
-            });
-
-        // 5. 비밀번호 유효성 검사 (수정 폼 제출 시)
-        const updateForm = document.getElementById('story_update_form');
-        const passwordUpdateField = document.getElementById('story_pw');
-        updateForm.addEventListener('submit', function (event) {
-            if (passwordUpdateField.value) {
-                const hasUpperCase = /[A-Z]+/g;
-                const hasLowerCase = /[a-z]+/g;
-                const hasSpecialChar = /[!@#$%^&*]+/g;
-
-                if (passwordUpdateField.value.length < 4 || !hasUpperCase.test(passwordUpdateField.value) || !hasLowerCase.test(passwordUpdateField.value) || !hasSpecialChar.test(passwordUpdateField.value)) {
-                    event.preventDefault();
-                    alert('비밀번호 변경 시 규칙을 만족해야 합니다.\n(4자리 이상, 대문자, 소문자, 특수문자(!@#$%^&*)를 각각 1개 이상 포함)');
-                    passwordUpdateField.focus();
+    // 2. 경품 정보 섹션 토글 함수 (유지)
+    function togglePrizeInfoSection() {
+        const isChecked = giftApplyCheckbox.checked;
+        prizeInfoSection.style.display = isChecked ? 'block' : 'none';
+        
+        const requiredFields = prizeInfoSection.querySelectorAll(
+            '#applicant_name, #applicant_email, #applicant_phone, #applicant_postal, #address_detail, #privacy_agree'
+        );
+        
+        requiredFields.forEach(field => {
+            if (isChecked) {
+                field.setAttribute('required', 'required');
+            } else {
+                field.removeAttribute('required');
+                if (field.type === 'checkbox') {
+                    field.checked = false;
+                } else if (field.value) {
+                    field.value = '';
                 }
             }
         });
+    }
+
+    // 3. 서버에서 사연 데이터를 가져와 필드에 채우기 (로직 수정)
+    const lookupName = urlParams.get('lookup_name');
+    const lookupPw = urlParams.get('lookup_pw'); 
+    
+    if (!lookupName || !lookupPw) {
+        alert('🚨 조회 정보가 누락되었습니다. 메인 페이지로 돌아갑니다.');
+        window.location.href = '/';
+        throw new Error('조회 정보 누락');
+    }
+
+    fetch(`/get-story?lookup_name=${encodeURIComponent(lookupName)}&lookup_pw=${encodeURIComponent(lookupPw)}`) 
+        .then(response => {
+            if (!response.ok) {
+                // 서버에서 404/500 응답 시 에러 메시지를 표시
+                return response.json().then(data => { throw new Error(data.error || '알 수 없는 오류'); });
+            }
+            return response.json();
+        })
+        .then(data => {
+            // ID를 hidden 필드에 설정
+            document.getElementById('story_id_hidden').value = data.STORY_ID;
+
+            // 💡 나이 (TEXT INPUT) 채우기
+            document.getElementById('story_name').value = data.STORY_NAME || '';
+            document.getElementById('story_age').value = data.STORY_AGE || '';
+            
+            // 💡 성별 (RADIO BUTTONS) 채우기
+            const genderValue = data.STORY_GENDER || '';
+            
+            if (genderValue === '남성') {
+                radioMale.checked = true;
+            } else if (genderValue === '여성') {
+                radioFemale.checked = true;
+            } else {
+                // '기타'이거나 서버에 저장된 직접 입력된 값인 경우
+                radioOther.checked = true;
+                
+                // 저장된 값이 '남성', '여성'이 아니면 기타 필드에 값을 넣음
+                if (genderValue && genderValue !== '기타') { 
+                    genderOtherInput.value = genderValue; 
+                } else {
+                     genderOtherInput.value = ''; 
+                }
+            }
+            
+            document.getElementById('story_content').value = data.STORY_CONTENT || '';
+
+            // 경품 응모 정보 필드 채우기 (유지)
+            const isGiftApplied = data.GIFT_APPLY === 'Y';
+            giftApplyCheckbox.checked = isGiftApplied;
+
+            if (isGiftApplied) {
+                document.getElementById('applicant_name').value = data.APPLICANT_NAME || '';
+                document.getElementById('applicant_email').value = data.APPLICANT_EMAIL || '';
+                document.getElementById('applicant_phone').value = data.APPLICANT_PHONE || '';
+                document.getElementById('applicant_postal').value = data.APPLICANT_POSTAL || '';
+                document.getElementById('address_detail').value = data.ADDRESS_DETAIL || '';
+                document.getElementById('privacy_agree').checked = data.PRIVACY_AGREE === 'Y';
+            }
+            
+            // 초기 상태 반영 및 이벤트 리스너 설정
+            toggleGenderOtherInput(); 
+            genderRadios.forEach(radio => {
+                radio.addEventListener('change', toggleGenderOtherInput);
+            });
+            togglePrizeInfoSection(); 
+            giftApplyCheckbox.addEventListener('change', togglePrizeInfoSection);
+            
+        })
+        .catch(error => {
+            console.error("데이터 로드 중 에러 발생:", error);
+            alert(`🚨 데이터 로드에 실패했습니다. (메시지: ${error.message})`);
+            window.location.href = '/'; 
+        });
+
+    // 4. 폼 제출 시 비동기 제출 로직 (유지)
+    const updateForm = document.getElementById('story_update_form'); 
+    const passwordUpdateField = document.getElementById('story_pw'); 
+    
+    updateForm.addEventListener('submit', async function (event) {
+        event.preventDefault(); 
+
+        // 비밀번호 유효성 검사 (유지)
+        if (passwordUpdateField.value) {
+            const hasUpperCase = /[A-Z]+/g;
+            const hasLowerCase = /[a-z]+/g;
+            const hasSpecialChar = /[!@#$%^&*]+/g;
+
+            if (passwordUpdateField.value.length < 4 || !hasUpperCase.test(passwordUpdateField.value) || !hasLowerCase.test(passwordUpdateField.value) || !hasSpecialChar.test(passwordUpdateField.value)) {
+                alert('비밀번호 변경 시 규칙을 만족해야 합니다.\n(4자리 이상, 대문자, 소문자, 특수문자(!@#$%^&*) 포함)');
+                return;
+            }
+        }
+        
+        const formData = new FormData(updateForm);
+        const data = Object.fromEntries(formData);
+        
+        // 서버에 보낼 데이터의 성별 필드 정리: '기타'를 선택했으면 story_gender_other의 값을 사용 (유지)
+        if (data.story_gender === '기타' && data.story_gender_other) {
+             data.story_gender = data.story_gender_other; 
+        }
+        
+        try {
+            const response = await fetch('/update-story', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json' 
+                },
+                body: JSON.stringify(data) 
+            });
+
+            if (response.ok) {
+                alert('✅ 정상적으로 수정되었습니다!');
+                window.location.href = '/'; 
+            } else {
+                const errorData = await response.json();
+                alert(`🚨 사연 수정 실패: ${errorData.error || '알 수 없는 서버 오류'}`);
+            }
+        } catch (error) {
+            console.error('수정 중 통신 오류:', error);
+            alert('🚨 수정 요청 중 네트워크 오류가 발생했습니다. 서버 상태를 확인하세요.');
+        }
     });
 </script>
-</body>
 
 </html>
