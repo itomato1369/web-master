@@ -1,6 +1,4 @@
-// ====================================================================
 // 1. 모듈 임포트 및 서버 설정
-// ====================================================================
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
@@ -17,9 +15,9 @@ oracledb.fetchAsString = [oracledb.CLOB, oracledb.NCLOB];
 
 // ⚠️ [필수 설정 1] Oracle DB 접속 정보
 const dbConfig = {
-    user: "scott",    // <<-- 실제 DB 사용자명으로 변경!
-    password: "tiger",// <<-- 실제 DB 비밀번호로 변경!
-    connectString: "localhost:1521/xe", 
+    user: "scott",    // 실제 DB 사용자명
+    password: "tiger",//  실제 DB 비밀번호
+    connectString: "localhost:1521/xe", // Oracle 서버
     poolAlias: "RADIO_POOL", 
     poolMin: 10,
     poolMax: 10,
@@ -30,10 +28,8 @@ const dbConfig = {
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 
-
 // ====================================================================
 // 2. 유틸리티 함수
-// ====================================================================
 function hashPassword(password) {
     return crypto.createHash('sha256').update(password).digest('hex');
 }
@@ -51,19 +47,33 @@ function validateStoryData(data) {
     return true;
 }
 
+/**
+ * 성별 필드 정리 함수: '기타' 선택 시 story_gender_other의 값을 최종 성별 값으로 사용 (원본 HTML 구조 반영)
+ * @param {object} data - 요청 본문 데이터
+ * @returns {string} - 최종 성별 값
+ */
+function resolveGender(data) {
+    if (data.story_gender === '기타') {
+        return data.story_gender_other || '기타(미입력)';
+    }
+    return data.story_gender;
+}
 
 // ====================================================================
 // 3. 라우팅 (Routing)
-// ====================================================================
-
 // 3.1. POST: 사연 저장 (DB 트랜잭션)
 app.post('/submit-story', async (req, res) => {
     let connection;
     const data = req.body;
 
+    // 💡 HTML이 원본으로 돌아가면서 성별 데이터를 body에서 직접 받게 됩니다.
+    // POST 요청 시에는 req.body에 데이터가 들어옵니다. (bodyParser.urlencoded 미들웨어 덕분)
     if (!validateStoryData(data)) {
         return res.status(400).send('<h1>오류: 필수 정보가 누락되었거나 서버 측 비밀번호 규칙을 위반했습니다.</h1>');
     }
+    
+    // 💡 성별 값 정리 (원본 HTML 구조 반영)
+    const finalGender = resolveGender(data);
 
     try {
         connection = await oracledb.getConnection(dbConfig.poolAlias);
@@ -82,7 +92,7 @@ app.post('/submit-story', async (req, res) => {
         const storyBinds = {
             name: data.story_name,
             age: data.story_age,
-            gender: data.story_gender === 'E' ? data.story_gender_other : data.story_gender,
+            gender: finalGender, 
             content: data.story_content,
             pw: hashPassword(data.story_pw),
             gift_apply: data.gift_apply === 'Y' ? 'Y' : 'N',
@@ -152,16 +162,27 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
 });
 
+// 💡 /story_modify.html은 이제 인증/조회를 위한 API로 동작하지 않습니다. (원본처럼 단순히 HTML 파일 서빙)
 app.get('/story_modify.html', (req, res) => {
+    // index.html이 원본처럼 GET 방식으로 조회 요청을 보냅니다.
+    // 조회에 필요한 lookup_name, lookup_pw를 query string으로 받아 modify.html에 그대로 전달합니다.
+    const query = req.query;
+    const url = `/story_modify.html?lookup_name=${encodeURIComponent(query.lookup_name || '')}&lookup_pw=${encodeURIComponent(query.lookup_pw || '')}`;
+    
+    // modify.html 파일 자체를 응답하되, URL에 쿼리스트링을 유지합니다.
     res.sendFile(path.join(__dirname, '..', 'public', 'modify.html'));
 });
 
-// 3.3. GET: 사연 조회 (데이터만 JSON으로 응답)
+
+// 3.3. GET: 사연 조회 (이름/비밀번호로 조회 후 데이터 포함한 JSON 응답) - modify.html의 JS에서 호출
 app.get('/get-story', async (req, res) => {
     let connection;
-    const { lookup_name, lookup_pw } = req.query; 
+    // .trim() 유지 (보안 및 정확한 조회를 위해 공백 제거)
+    const lookup_name = req.query.lookup_name ? req.query.lookup_name.trim() : null;
+    const lookup_pw = req.query.lookup_pw ? req.query.lookup_pw.trim() : null;
 
     if (!lookup_name || !lookup_pw) {
+        // modify.html의 JS에서 이 API를 호출하므로 JSON으로 응답
         return res.status(400).json({ error: "조회에 필요한 이름과 비밀번호가 누락되었습니다." });
     }
 
@@ -172,7 +193,8 @@ app.get('/get-story', async (req, res) => {
 
         const sql = `
             SELECT 
-                s.*, 
+                s.story_id, s.story_name, s.story_age, s.story_gender, 
+                s.story_content, s.gift_apply,
                 g.applicant_name, g.applicant_email, g.applicant_postal, 
                 g.applicant_phone, g.address_detail, g.privacy_agree
             FROM story s
@@ -186,11 +208,9 @@ app.get('/get-story', async (req, res) => {
             return res.status(404).json({ error: "일치하는 사연을 찾을 수 없습니다. 이름과 비밀번호를 확인해 주세요." });
         }
         
-        // 🔴 [순환 참조 해결 2] JSON.parse(JSON.stringify())를 사용하여 
-        // LOB/메타데이터를 포함한 모든 순환 참조를 강제로 제거하고 순수 데이터 객체를 생성합니다.
         const storyData = JSON.parse(JSON.stringify(result.rows[0]));
 
-        console.log(`✅ 조회 성공: ${lookup_name} 사연 데이터 전송`);
+        console.log(`✅ 조회 성공: ${lookup_name} 사연 데이터 전송 (ID: ${storyData.STORY_ID})`);
         res.status(200).json(storyData); 
 
     } catch (err) {
@@ -208,69 +228,211 @@ app.get('/get-story', async (req, res) => {
 });
 
 
-// ====================================================================
-// 3.4. GET: 관리자 페이지 HTML 파일 서빙 (list.html 사용)
-// ====================================================================
-app.get('/admin/stories', (req, res) => {
-    // public 폴더 내의 list.html 파일을 응답합니다.
-    res.sendFile(path.join(__dirname, '..', 'public', 'list.html'));
-});
-
-
-// ====================================================================
-// 3.5. GET: 관리자 API (전체 사연 데이터 JSON 응답)
-// ====================================================================
-app.get('/api/admin/stories', async (req, res) => {
+// 3.4. POST: 사연 수정 (DB UPDATE 처리) =
+app.post('/update-story', async (req, res) => {
     let connection;
+    // 💡 req.body로 JSON 데이터가 들어옵니다. (modify.html의 JS 비동기 제출 로직 때문)
+    const data = req.body; 
+    const { story_id, story_name, story_content, story_pw, gift_apply } = data;
+
+    if (!story_id || !story_name || !story_content) {
+        return res.status(400).json({ error: "필수 정보가 누락되었습니다. (ID, 이름, 내용)" });
+    }
+    
+    // 💡 성별 값 정리 (원본 HTML 구조 반영)
+    const finalGender = resolveGender(data);
 
     try {
         connection = await oracledb.getConnection(dbConfig.poolAlias);
-
-        // 🟢 [SQL 쿼리] 사연 목록에 필요한 핵심 정보를 조회
-        const sql = `
-            SELECT 
-                s.story_id, s.story_name, s.story_age, s.story_gender, 
-                s.story_content, s.gift_apply,
-                g.applicant_name, g.applicant_email
-            FROM story s
-            LEFT JOIN gift_applicant g ON s.story_id = g.story_id
-            ORDER BY s.story_id DESC`; // 최신 사연을 먼저 보여줍니다.
-
-        const result = await connection.execute(sql);
         
-        // 🔴 순환 참조 방지 및 데이터 추출
-        const stories = JSON.parse(JSON.stringify(result.rows)); 
+        let storyBinds = {
+            id: story_id,
+            name: story_name,
+            age: data.story_age,
+            gender: finalGender, 
+            content: story_content,
+            gift_apply: gift_apply === 'Y' ? 'Y' : 'N'
+        };
 
-        // JSON 데이터만 클라이언트(list.js)로 전송
-        res.status(200).json(stories);
+        // 1. STORY 테이블 업데이트 SQL
+        let storySql = `
+            UPDATE story SET 
+                story_name = :name, 
+                story_age = :age, 
+                story_gender = :gender, 
+                story_content = :content, 
+                gift_apply = :gift_apply`;
+        
+        if (story_pw) {
+            storySql += `, story_pw = :new_pw`;
+            storyBinds.new_pw = hashPassword(story_pw);
+        }
+
+        storySql += ` WHERE story_id = :id`;
+
+        const storyResult = await connection.execute(storySql, storyBinds, { autoCommit: false });
+        
+        if (storyResult.rowsAffected === 0) {
+            await connection.rollback();
+            return res.status(404).json({ error: "해당 사연 ID를 찾을 수 없거나 수정할 내용이 없습니다." });
+        }
+
+
+        // 2. GIFT_APPLICANT 테이블 처리 (경품 응모 여부에 따라 INSERT/DELETE)
+        await connection.execute(`DELETE FROM gift_applicant WHERE story_id = :id`, { id: story_id }, { autoCommit: false });
+
+        if (gift_apply === 'Y') {
+            const applicantSql = `
+                INSERT INTO gift_applicant (
+                    story_id, applicant_name, applicant_email, applicant_postal, 
+                    applicant_phone, address_detail, privacy_agree
+                ) VALUES (
+                    :story_id, :app_name, :app_email, :app_postal, 
+                    :app_phone, :addr_detail, :privacy_agree
+                )`;
+            
+            const applicantBinds = {
+                story_id: story_id,
+                app_name: data.applicant_name || null,
+                app_email: data.applicant_email || null,
+                app_postal: data.applicant_postal || null,
+                app_phone: data.applicant_phone || null,
+                addr_detail: data.address_detail || null,
+                privacy_agree: data.privacy_agree === 'Y' ? 'Y' : 'N',
+            };
+            
+            await connection.execute(applicantSql, applicantBinds, { autoCommit: false });
+        } 
+
+        // 3. 최종 커밋
+        await connection.commit();
+
+        console.log(`✅ 사연 수정 완료 (ID: ${story_id})`);
+        res.status(200).json({ message: "사연이 성공적으로 수정되었습니다." }); 
 
     } catch (err) {
-        console.error("🚨🚨🚨 관리자 API 데이터 로드 오류 (DB/SQL):", err.message);
-        res.status(500).json({ error: "데이터베이스 오류로 사연 목록을 가져올 수 없습니다." });
+        if (connection) {
+            try {
+                await connection.rollback(); 
+            } catch (err2) {
+                console.error("Rollback error:", err2);
+            }
+        }
+        
+        console.error("🚨 서버 오류 (DB/SQL) - 수정 실패:", err.message);
+        res.status(500).json({ error: "서버 오류로 사연 수정에 실패했습니다." });
     } finally {
         if (connection) {
-             try {
+            try {
                 await connection.close();
             } catch (err) {
-                console.error("Connection close error in admin api:", err);
+                console.error("Connection close error:", err);
             }
         }
     }
 });
 
 
-// ====================================================================
-// 3.6. GET: 관리자 상세 페이지 (개인 정보 포함)
-// ====================================================================
+// 3.5. GET: 관리자 페이지 HTML 파일 서빙 (list.html 사용) - 유지
+app.get('/admin/stories', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'public', 'list.html'));
+});
+
+
+// 관리자가 전체 목록을 보는 페이지 
+// 모든 사연 목록을 검색하여 반환하는 API 라우트
+app.get('/api/admin/stories', async (req, res) => {
+    let connection;
+    try {
+        connection = await oracledb.getConnection('RADIO_POOL');
+
+        const page = parseInt(req.query.page) || 1;
+        const limit = parseInt(req.query.limit) || 10;
+        const searchName = req.query.name || ''; 
+        
+        const offset = (page - 1) * limit;
+
+        // 1. WHERE 절 및 바인딩 변수 준비
+        let whereClause = '';
+        const searchBindParams = {}; 
+
+        if (searchName) {
+            // STORY 테이블 (별칭 s)의 STORY_NAME 컬럼 기준으로 검색
+            whereClause = `WHERE s.STORY_NAME LIKE :searchName`; 
+            searchBindParams.searchName = `%${searchName}%`;
+        }
+        
+        //  2. 기본 쿼리 구조 (STORY 테이블과 GIFT_APPLICANT 테이블을 JOIN)
+        const baseFromClause = `
+            FROM STORY s
+            LEFT JOIN GIFT_APPLICANT ga ON s.STORY_ID = ga.STORY_ID
+        `;
+        
+        // 3. 총 데이터 수 쿼리 (WHERE 절 포함)
+        const countQuery = `
+            SELECT COUNT(*) AS TOTAL_COUNT 
+            ${baseFromClause}
+            ${whereClause} 
+        `;
+        
+        // 총 개수 쿼리 실행
+        const countResult = await connection.execute(countQuery, searchBindParams);
+        const totalCount = countResult.rows[0].TOTAL_COUNT;
+
+        // 4. 특정 페이지 데이터 쿼리 (SELECT 컬럼 지정 및 WHERE 절, 페이징 포함)
+        const dataQuery = `
+            SELECT 
+                s.STORY_ID, s.STORY_NAME, s.STORY_AGE, s.STORY_GENDER, 
+                s.STORY_CONTENT, s.GIFT_APPLY, 
+                ga.APPLICANT_NAME, ga.APPLICANT_EMAIL 
+            ${baseFromClause}
+            ${whereClause} 
+            ORDER BY 
+                s.STORY_ID DESC
+            OFFSET :offset ROWS FETCH NEXT :limit ROWS ONLY
+        `;
+        
+        // 데이터 쿼리 실행 시, 검색어 바인딩 변수와 페이징 변수를 통합
+        const dataBindParams = { 
+            ...searchBindParams, 
+            offset: offset,      
+            limit: limit         
+        };
+
+        const dataResult = await connection.execute(
+            dataQuery, 
+            dataBindParams, 
+            { fetchInfo: { "STORY_CONTENT": { type: oracledb.STRING } } }
+        );
+
+        res.json({
+            totalCount: totalCount,
+            stories: dataResult.rows
+        });
+
+    } catch (err) {
+        console.error("🚨 사연 목록 조회 중 최종 오류 발생 (테이블/조인 오류 해결 시도):", err); 
+        res.status(500).json({ error: "데이터 로드 실패: DB 구조를 반영하여 수정되었습니다. 서버 로그를 확인하세요.", detail: err.message });
+    } finally {
+        if (connection) {
+            try {
+                await connection.close();
+            } catch (err) {
+                console.error("DB 연결 종료 실패:", err);
+            }
+        }
+    }
+});
+
+
+// 3.7. GET: 방식으로  (개인 정보 포함) 
 app.get('/admin/story/:id', async (req, res) => {
     let connection;
-    // URL에서 사연 ID를 추출합니다.
     const storyId = req.params.id; 
 
     try {
         connection = await oracledb.getConnection(dbConfig.poolAlias);
 
-        // 🟢 [SQL 쿼리] 해당 ID의 사연과 경품 응모자의 모든 개인 정보를 조회
         const sql = `
             SELECT 
                 s.story_id, s.story_name, s.story_age, s.story_gender, 
@@ -287,10 +449,7 @@ app.get('/admin/story/:id', async (req, res) => {
             return res.status(404).send('<h1>오류: 해당 사연 ID를 찾을 수 없습니다.</h1>');
         }
 
-        // 🔴 순환 참조 방지 및 데이터 추출
         const storyDetail = JSON.parse(JSON.stringify(result.rows[0]));
-
-        // 상세 정보 HTML 생성
         const html = generateDetailHtml(storyDetail);
 
         res.status(200).send(html);
@@ -314,10 +473,10 @@ app.get('/admin/story/:id', async (req, res) => {
 });
 
 
-// ====================================================================
-// 3.7. 상세 정보 HTML 생성 함수 (서버 렌더링 유지)
-// ====================================================================
-
+// 3.8. 관리자가 보는 목록에서 상세보기 버튼을 눌렀을 때 나오는 HTML 페이지
+// server.js에 HTML을 만든 이유는 서버 렌더링 (Server-Side Rendering, SSR) 방식이기 때문
+// 그리고 데이터 접근 및 보안문제
+//  생성 함수 (서버 렌더링 유지)
 function generateDetailHtml(data) {
     const isGiftApplicant = data.GIFT_APPLY === 'Y';
     
@@ -338,22 +497,23 @@ function generateDetailHtml(data) {
                 .private-data { border-left: 5px solid ${isGiftApplicant ? '#28a745' : '#dc3545'}; padding-left: 10px; }
                 .back-button { display: inline-block; padding: 10px 15px; background-color: #6c757d; color: white; text-decoration: none; border-radius: 5px; margin-top: 20px; }
             </style>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
         </head>
         <body>
-            <h1>📻 사연 상세 정보 (ID: ${data.STORY_ID})</h1>
+            <h1><i class="fa-solid fa-list"></i> 사연 상세 정보 (story_id: ${data.STORY_ID})</h1>
 
-            <h2>📝 사연 기본 정보</h2>
+            <h2>사연 기본 정보</h2>
             <div class="info-box">
-                <p><span>이름:</span> ${data.STORY_NAME}</p>
+                <p><span>이름/닉네임:</span> ${data.STORY_NAME}</p>
                 <p><span>나이:</span> ${data.STORY_AGE || '-'}</p>
                 <p><span>성별:</span> ${data.STORY_GENDER || '-'}</p>
                 <p><span>경품 응모 여부:</span> ${data.GIFT_APPLY === 'Y' ? '✅ 예' : '❌ 아니오'}</p>
             </div>
 
-            <h2>📜 사연 내용</h2>
+            <h2><i class="fa-solid fa-file-lines"></i>  사연 내용</h2>
             <div class="story-content">${data.STORY_CONTENT || '내용 없음'}</div>
 
-            <h2>📞 경품 응모자 개인 정보</h2>
+            <h2><i class="fa-solid fa-user-lock"></i> 경품 응모자 개인 정보</h2>
             ${isGiftApplicant ? `
                 <div class="info-box private-data">
                     <p><span>신청자 이름:</span> ${data.APPLICANT_NAME}</p>
@@ -365,11 +525,11 @@ function generateDetailHtml(data) {
                 </div>
             ` : `
                 <div class="info-box">
-                    <p style="color: #dc3545;">경품 응모를 하지 않아 개인 정보가 저장되어 있지 않습니다.</p>
+                    <p style="color: #dc3545;">경품 응모를 하지 않은 사람입니다.</p>
                 </div>
             `}
 
-            <a href="/admin/stories" class="back-button">← 목록으로 돌아가기</a>
+            <a href="/admin/stories" class="back-button"><i class="fa-solid fa-arrow-left"></i> 목록으로 돌아가기</a>
         </body>
         </html>
     `;
@@ -378,11 +538,7 @@ function generateDetailHtml(data) {
 // 정적 파일 제공
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
-
-// ====================================================================
 // 4. 서버 시작 전 초기화 (Connection Pooling)
-// ====================================================================
-
 // DB 연결 풀 초기화 함수
 async function initialize() {
     try {
