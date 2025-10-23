@@ -5,17 +5,24 @@
 
 :root {
     /* 색상 변수 정의 */
-    --primary-color: #008080; /* 강조색: 차분한 청록색 (Teal) */
-    --secondary-color: #f7f7f7; /* 섹션 배경: 은은한 회색 */
+    --primary-color: #008080;
+    /* 강조색: 차분한 청록색 (Teal) */
+    --secondary-color: #f7f7f7;
+    /* 섹션 배경: 은은한 회색 */
     --text-color: #333333;
-    --background-color: #ffffff; /* 흰색 배경 */
+    --background-color: #ffffff;
+    /* 흰색 배경 */
     --border-color: #e0e0e0;
-    --focus-color: #008080; /* 포커스 강조 색상: 청록색 */
-    --button-bg-color: #444444; /* 버튼 기본 색상 */
+    --focus-color: #008080;
+    /* 포커스 강조 색상: 청록색 */
+    --button-bg-color: #444444;
+    /* 버튼 기본 색상 */
 }
+
 body {
     font-family: 'Noto Sans KR', sans-serif;
-    background-color: #eef2ea; /* 바깥 배경을 아주 연한 회색으로 변경 */
+    background-color: #eef2ea;
+    /* 바깥 배경을 아주 연한 회색으로 변경 */
     color: var(--text-color);
     line-height: 1.6;
     margin: 0;
@@ -24,33 +31,42 @@ body {
     justify-content: center;
     align-items: flex-start;
     min-height: 100vh;
-    position: relative; /* 자식 요소인 overlay의 기준점 */
+    position: relative;
+    /* 자식 요소인 overlay의 기준점 */
 }
+
 .container {
     width: 100%;
-    max-width: 800px; 
+    max-width: 800px;
     padding: 30px;
-    background-color: white; /* 중앙 콘텐츠는 흰색으로 명확하게 */
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.05); /* 은은한 그림자 추가 */
-    z-index: 10; /* 배경 위에 오도록 z-index 설정 */
+    background-color: white;
+    /* 중앙 콘텐츠는 흰색으로 명확하게 */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+    /* 은은한 그림자 추가 */
+    z-index: 10;
+    /* 배경 위에 오도록 z-index 설정 */
     margin: 0 auto;
 }
 
 header {
-    text-align: center; /* 내부 텍스트(제목, 부제목) 중앙 정렬 유지 */
+    text-align: center;
+    /* 내부 텍스트(제목, 부제목) 중앙 정렬 유지 */
     padding-bottom: 25px;
     border-bottom: 3px solid var(--border-color);
     margin-bottom: 35px;
-    position: relative; 
+    position: relative;
 }
+
 .header-logo {
-    max-width: 180px; /* 로고 최대 너비 설정 (유지) */
+    max-width: 180px;
+    /* 로고 최대 너비 설정 (유지) */
     height: auto;
-    margin-bottom: 15px; /* 제목과의 간격 */
-    
+    margin-bottom: 15px;
+    /* 제목과의 간격 */
+
     /* 💡 중앙 정렬을 위한 핵심 수정 */
-    display: block; 
-    margin-left: auto; 
+    display: block;
+    margin-left: auto;
     margin-right: auto;
 }
 
@@ -72,12 +88,15 @@ header h1 {
     padding: 25px;
     margin-bottom: 30px;
     border: 1px solid var(--border-color);
-    border-radius: 5px; /* 모서리 부드럽게 */
-    background-color: var(--secondary-color); /* 은은한 배경색으로 구분 */
+    border-radius: 5px;
+    /* 모서리 부드럽게 */
+    background-color: var(--secondary-color);
+    /* 은은한 배경색으로 구분 */
 }
 
 .section h2 {
-    color: var(--primary-color); /* 강조색 사용 */
+    color: var(--primary-color);
+    /* 강조색 사용 */
     border-bottom: 2px solid var(--primary-color);
     padding-bottom: 8px;
     margin-bottom: 20px;
@@ -104,13 +123,15 @@ header h1 {
     color: var(--text-color);
 }
 
-input[type="text"], 
+input[type="text"],
 input[type="password"],
 input[type="email"],
 input[type="tel"],
+input[type="number"],
 textarea {
     width: 100%;
-    padding: 14px; /* 높이 키우기 */
+    padding: 14px;
+    /* 높이 키우기 */
     border: 1px solid var(--border-color);
     border-radius: 3px;
     box-sizing: border-box;
@@ -122,7 +143,8 @@ textarea {
 input:focus,
 textarea:focus {
     border-color: var(--focus-color);
-    box-shadow: 0 0 0 1px var(--focus-color); /* 얇은 포커스 테두리 */
+    box-shadow: 0 0 0 1px var(--focus-color);
+    /* 얇은 포커스 테두리 */
     outline: none;
 }
 
@@ -130,20 +152,62 @@ textarea {
     resize: vertical;
 }
 
+/* 경고 메시지 스타일 */
+.error-message {
+    color: red;
+    /* 빨간색 텍스트 */
+    font-size: 0.9em;
+    /* 약간 작은 글꼴 */
+    display: block;
+    /* 줄 바꿈을 위해 블록 요소로 설정 */
+    margin-top: 5px;
+    /* 체크박스와 간격 */
+    font-weight: 500;
+}
+
+/* 체크박스와 레이블을 한 줄에 정렬하고, 에러 메시지가 다음 줄에 오도록 설정 */
+.form-group.checkbox-group {
+    /* Flexbox를 사용하여 input과 label을 한 줄에 정렬 */
+    display: flex;
+    align-items: center;
+    /* 수직 중앙 정렬 */
+    /* span.error-message가 다음 줄로 내려가도록 허용 */
+    flex-wrap: wrap;
+}
+
+.form-group.checkbox-group input[type="checkbox"] {
+    /* 체크박스와 텍스트 사이의 간격 조정 */
+    margin-right: 8px;
+    /* 수직 정렬을 위해 불필요한 마진 제거 */
+    margin-top: 0;
+    /* 체크박스가 수직 중앙에 더 잘 위치하도록 */
+    align-self: flex-start;
+}
+
+
 /* 라디오/체크박스 스타일 */
+.radio-group {
+    display: flex;
+    flex-direction: column;
+    /* 주축을 수직으로 변경 */
+    gap: 8px;
+    /* 각 라디오 옵션 사이의 간격 */
+}
+
 .radio-group label,
 .checkbox-group label {
     margin-right: 25px;
     font-weight: 400;
 }
+
 /* 라디오 버튼 그룹 레이아웃을 위한 기본 스타일 추가 */
 .radio-group label {
-    margin-right: 15px;
+    margin-right: 5px;
     cursor: pointer;
 }
 
 /* "나이" 레이블이 한 줄에 배치되도록 기본 블록 속성 제거 */
-.form-group.inline-unit > label[for="story_age"] {
+.form-group.inline-unit>label[for="story_age"] {
     display: inline-block;
     margin-right: 10px;
 }
@@ -151,33 +215,34 @@ textarea {
 /* 핵심: '세' 레이블이 옆에 붙도록 함 */
 .form-group.inline-unit .unit-label {
     /* 기본적으로 <label>은 인라인이지만, 명시적으로 설정하거나 <span>을 사용하면 확실합니다. */
-    display: inline; 
-    margin-left: 5px; /* 간격 조정 */
+    display: inline;
+    margin-left: 5px;
+    /* 간격 조정 */
 }
 
 .form-group.inline-unit input {
     /* <input>은 기본적으로 inline-block입니다. */
-    width: 50px; 
+    width: 100px;
     /* float를 사용하여 강제로 붙일 수도 있지만, Flexbox가 더 안정적입니다. */
 }
 
 /* 성별 선택 라디오 버튼 가로로 배치 */
 .radio-group div {
     /* 💡 display: flex; 로 설정하여 내부 요소들을 수평으로 나란히 배치 */
-    display: flex; 
-    
+    display: flex;
+
     /* 라디오 버튼과 텍스트를 수직 중앙에 정렬 (가장 중요한 부분) */
-    align-items: center; 
-    
+    align-items: center;
+
     /* 각 옵션(남성, 여성, 직접입력) 사이의 수직 간격 */
-    margin-bottom: 8px; 
+    margin-bottom: 8px;
 }
 
 /* 2단계: 라디오 버튼과 텍스트 사이의 간격 조정 */
 .radio-group input[type="radio"] {
     /* 텍스트와의 간격을 주기 위해 우측 마진 추가 */
-    margin-right: 5px; 
-    
+    margin-right: 5px;
+
     /* 전역 CSS의 영향을 최소화하기 위해 마진/패딩 초기화 */
     margin-top: 0;
     margin-bottom: 0;
@@ -197,8 +262,10 @@ textarea {
     margin-top: 40px;
 }
 
-.submit-button, .search-button {
-    padding: 15px 35px; /* 버튼 크기 키우기 */
+.submit-button,
+.search-button {
+    padding: 15px 35px;
+    /* 버튼 크기 키우기 */
     border: none;
     border-radius: 5px;
     font-size: 1.1em;
@@ -208,46 +275,61 @@ textarea {
 }
 
 .submit-button {
-    background-color: #008080; /* 기본 검정/어두운 회색 */
+    background-color: #008080;
+    /* 기본 검정/어두운 회색 */
     color: white;
     width: 100%;
     max-width: 350px;
 }
+
 .submit-button:hover {
-    background-color: #0b9d9d; /* 호버 시 청록색으로 변경 */
+    background-color: #0b9d9d;
+    /* 호버 시 청록색으로 변경 */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1)
 }
 
 /* 우편번호 입력창과 버튼을 한 줄에 배치 (Flexbox) */
 .post-search-line {
     display: flex;
-    gap: 10px; /* 입력창과 버튼 사이 간격 */
-    margin-bottom: 10px; /* 다음 주소 입력창과의 간격 */
+    gap: 10px;
+    /* 입력창과 버튼 사이 간격 */
+    margin-bottom: 10px;
+    /* 다음 주소 입력창과의 간격 */
 }
 
 .post-search-line input[type="text"] {
     /* 우편번호 입력창 너비 조정 */
-    width: 100px; 
-    flex-shrink: 0; /* 버튼에 공간을 양보하지 않도록 설정 */
+    width: 100px;
+    flex-shrink: 0;
+    /* 버튼에 공간을 양보하지 않도록 설정 */
 }
 
 /*  우편번호 버튼 디자인 (postcode-btn) */
 .postcode-btn {
     /* 기본 버튼 스타일 제거 및 현대적 디자인 적용 */
-    background-color: #5f9ea0; /* 산뜻한 파란색 계열 */
-    color: white; /* 흰색 텍스트 */
-    border: none; /* 테두리 제거 */
-    padding: 8px 15px; /* 내부 여백 */
+    background-color: #5f9ea0;
+    /* 산뜻한 파란색 계열 */
+    color: white;
+    /* 흰색 텍스트 */
+    border: none;
+    /* 테두리 제거 */
+    padding: 8px 15px;
+    /* 내부 여백 */
     font-weight: bold;
-    cursor: pointer; /* 마우스 오버 시 포인터 모양 */
-    border-radius: 5px; /* 둥근 모서리 */
+    cursor: pointer;
+    /* 마우스 오버 시 포인터 모양 */
+    border-radius: 5px;
+    /* 둥근 모서리 */
     font-size: 14px;
-    height: 40px; /* 입력창 높이와 맞추기 (선택 사항) */
-    transition: background-color 0.2s; /* 호버 애니메이션 */
+    height: 40px;
+    /* 입력창 높이와 맞추기 (선택 사항) */
+    transition: background-color 0.2s;
+    /* 호버 애니메이션 */
 }
 
 .postcode-btn:hover {
-    background-color: #056f71; /* 호버 시 약간 어둡게 */
+    background-color: #056f71;
+    /* 호버 시 약간 어둡게 */
 }
 
 
@@ -255,9 +337,11 @@ textarea {
 .info-alert {
     padding: 18px;
     margin-bottom: 25px;
-    background-color: #e6f7f7; /* 연한 청록색 배경 */
+    background-color: #e6f7f7;
+    /* 연한 청록색 배경 */
     border: 1px solid #b3cccc;
-    border-left: 5px solid #008080; /* 왼쪽 강조 선 청록색 */
+    border-left: 5px solid #008080;
+    /* 왼쪽 강조 선 청록색 */
     border-radius: 5px;
     color: #004d4d;
     font-size: 0.95em;
@@ -273,6 +357,7 @@ textarea {
     border-radius: 5px;
     transition: background-color 0.3s;
 }
+
 .back-button:hover {
     background-color: #5a6268;
 }
@@ -280,18 +365,20 @@ textarea {
 /* 푸터 영역 */
 footer {
     /* 🎨 연한 배경색으로 콘텐츠와 분리 */
-    background-color: var(--secondary-color); 
+    background-color: var(--secondary-color);
     padding: 30px 0;
-    width: 100%; /* 전체 너비 차지 */
+    width: 100%;
+    /* 전체 너비 차지 */
     border-top: 2px solid var(--border-color);
     margin-top: 40px;
     z-index: 10;
 }
 
 .footer-content {
-    max-width: 800px; /* 컨테이너 너비와 일치 */
+    max-width: 800px;
+    /* 컨테이너 너비와 일치 */
     margin: 0 auto;
-    padding: 0 30px; 
+    padding: 0 30px;
     text-align: center;
 }
 
@@ -299,8 +386,10 @@ footer {
 .footer-links {
     margin-bottom: 25px;
     display: flex;
-    justify-content: center; /* 가운데 정렬 */
-    gap: 15px; /* 링크 사이의 간격 */
+    justify-content: center;
+    /* 가운데 정렬 */
+    gap: 15px;
+    /* 링크 사이의 간격 */
 }
 
 .footer-links a {
@@ -312,7 +401,8 @@ footer {
 }
 
 .footer-links a:hover {
-    color: var(--primary-color); /* 청록색으로 호버 강조 */
+    color: var(--primary-color);
+    /* 청록색으로 호버 강조 */
 }
 
 /* 소셜 미디어 섹션 */
@@ -327,15 +417,18 @@ footer {
 }
 
 .social-icons a {
-    color: var(--text-color); /* 아이콘 기본 색상 */
+    color: var(--text-color);
+    /* 아이콘 기본 색상 */
     font-size: 1.5em;
     margin: 0 10px;
     transition: color 0.3s, transform 0.3s;
 }
 
 .social-icons a:hover {
-    color: var(--primary-color); /* 청록색으로 아이콘 강조 */
-    transform: scale(1.1); /* 호버 시 약간 확대 */
+    color: var(--primary-color);
+    /* 청록색으로 아이콘 강조 */
+    transform: scale(1.1);
+    /* 호버 시 약간 확대 */
 }
 
 /* 저작권 및 기타 정보 */

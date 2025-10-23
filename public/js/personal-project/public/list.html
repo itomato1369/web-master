@@ -1,26 +1,67 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <title>관리자 - 사연 응모 목록</title>
     <style>
-        body { font-family: Arial, sans-serif; padding: 20px; }
-        h1 { color: #333; }
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; font-size: 14px; }
-        th { background-color: #f8f5f5; }
-        tr:hover { background-color: #f5f0f0; }
-        button { padding: 5px 10px; cursor: pointer; background-color: #008080; color: white; border: none; border-radius: 3px; }
-        .loading { font-size: 1.2em; color: #6c757d; }
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        th {
+            background-color: #f8f5f5;
+        }
+
+        tr:hover {
+            background-color: #f5f0f0;
+        }
+
+        button {
+            padding: 5px 10px;
+            cursor: pointer;
+            background-color: #008080;
+            color: white;
+            border: none;
+            border-radius: 3px;
+        }
+
+        .loading {
+            font-size: 1.2em;
+            color: #6c757d;
+        }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
+
 <body>
-    <h1><i class="fa-solid fa-house-signal"></i>  사연 응모 관리자 목록 (<span id="story-count">로딩 중...</span>)</h1>
+    <h1><i class="fa-solid fa-house-signal"></i> 사연 응모 관리자 목록 (<span id="story-count">로딩 중...</span>)</h1>
     <div id="search-area" style="margin-bottom: 20px;">
-        <i class="fa-solid fa-magnifying-glass"></i> <input type="text" id="search-name" placeholder="이름/닉네임으로 검색" style="padding: 8px; width: 250px; border: 1px solid #ddd; border-radius: 3px;">
-        <button id="search-button" style="padding: 8px 15px; background-color: #5f9ea0; color: white; border: none; border-radius: 3px; cursor: pointer;">검색</button>
-        <button id="reset-button" style="padding: 8px 15px; background-color: #6c757d; color: white; border: none; border-radius: 3px; cursor: pointer;">초기화</button>
+        <i class="fa-solid fa-magnifying-glass"></i> <input type="text" id="search-name" placeholder="이름/닉네임으로 검색"
+            style="padding: 8px; width: 250px; border: 1px solid #ddd; border-radius: 3px;">
+        <button id="search-button"
+            style="padding: 8px 15px; background-color: #5f9ea0; color: white; border: none; border-radius: 3px; cursor: pointer;">검색</button>
+        <button id="reset-button"
+            style="padding: 8px 15px; background-color: #6c757d; color: white; border: none; border-radius: 3px; cursor: pointer;">초기화</button>
     </div>
 
     <table>
@@ -37,12 +78,15 @@
                 <th>상세정보</th>
             </tr>
         </thead>
-        <tbody id="story-list-body"> 
-            <tr><td colspan="9" class="loading">데이터를 불러오는 중입니다...</td></tr>
+        <tbody id="story-list-body">
+            <tr>
+                <td colspan="9" class="loading">데이터를 불러오는 중입니다...</td>
+            </tr>
         </tbody>
     </table>
-    
+
     <script src="/list.js"></script>
 
 </body>
+
 </html>
